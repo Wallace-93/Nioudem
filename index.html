@@ -1030,7 +1030,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
   </div>
   <div class="cf-row"><label class="cf-lbl">Email <span class="cf-req">*</span></label><input class="cf-inp" id="cfE" type="email" placeholder="votre@email.com"><div class="cf-e" id="eE">Email invalide.</div></div>
   <div class="cf-row"><label class="cf-lbl">Téléphone <span class="cf-req">*</span></label><input class="cf-inp" id="cfT" type="tel" placeholder="+33 6 …"><div class="cf-e" id="eT">Requis.</div></div>
-  <button class="btn-sub" onclick="submitForm()">Un coach me contacte dans les 24h →</button>
+  <button class="btn-sub" id="cfSubmit" onclick="submitForm()">Un coach me contacte dans les 24h →</button>
 </div>
 
 <!-- MERCI -->
@@ -1076,10 +1076,8 @@ footer{background:var(--deep);padding:56px 48px 32px;}
 /* CARROUSEL */
 (function(){
   var track=document.getElementById('cTrack');
-  if(!track) return;
   var cards=track.querySelectorAll('.f-card');
   var dotsEl=document.getElementById('cDots');
-  if(!dotsEl) return;
   var active=0;
   cards.forEach(function(_,i){
     var d=document.createElement('div');
@@ -1114,11 +1112,8 @@ var hor=["Court terme (<6 mois)","Moyen terme (1–3 ans)","Long terme (5–10 a
 var cur=0,ans={};
 
 function startQuiz(){
-  var coach=document.getElementById('coach');
-  if(coach) coach.style.display='none';
+  document.getElementById('coach').style.display='none';
   var s=document.getElementById('quizSection');
-  if(!s) return;
-  cur=0; ans={};
   s.style.display='block';
   s.scrollIntoView({behavior:'smooth',block:'start'});
   renderQ();
@@ -1185,7 +1180,7 @@ function submitForm(){
   setE('cfP','eP',!p);setE('cfN','eN',!n);setE('cfE','eE',!eOk);setE('cfT','eT',!t);
   if(!p||!n||!eOk||!t)return;
 
-  var btn=document.querySelector('.btn-sub');
+  var btn=document.getElementById('cfSubmit');
   if(btn){btn.textContent='Envoi en cours…';btn.style.opacity='0.6';btn.style.pointerEvents='none';}
 
   fetch('https://api.web3forms.com/submit',{
@@ -1202,7 +1197,7 @@ function submitForm(){
       priorite:pri[ans.p||0],
       objectif:obj[ans.ob||0],
       horizon:hor[ans.h||0],
-      message:'Nouveau prospect qualifié\n\nNom : '+p+' '+n+'\nEmail : '+e+'\nTéléphone : '+t+'\n\nProfil détecté :\n- Niveau : '+niv[ans.n||0]+'\n- Priorité : '+pri[ans.p||0]+'\n- Objectif : '+obj[ans.ob||0]+'\n- Horizon : '+hor[ans.h||0]
+      message:'Prospect NiouDem\n\nNom : '+p+' '+n+'\nEmail : '+e+'\nTél : '+t+'\n\nProfil :\n- Niveau : '+niv[ans.n||0]+'\n- Priorité : '+pri[ans.p||0]+'\n- Objectif : '+obj[ans.ob||0]+'\n- Horizon : '+hor[ans.h||0]
     })
   })
   .then(function(r){return r.json();})
@@ -1214,7 +1209,7 @@ function submitForm(){
   })
   .catch(function(){
     if(btn){btn.textContent='Un coach me contacte dans les 24h →';btn.style.opacity='1';btn.style.pointerEvents='auto';}
-    alert('Une erreur est survenue. Veuillez réessayer.');
+    alert('Erreur. Veuillez réessayer.');
   });
 }
 </script>
