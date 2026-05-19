@@ -597,6 +597,29 @@ footer{background:var(--deep);padding:56px 48px 32px;}
 @keyframes rw9{0%,90.0%{opacity:0;transform:translateY(14px)}91.79%,98.21%{opacity:1;transform:translateY(0)}100.0%,100%{opacity:0;transform:translateY(-10px)}}
 
 /* ── RESPONSIVE ── */
+/* ── MOBILE 393px ── */
+@media(max-width:480px){
+  .nav{padding:0 16px;height:56px;}
+  .nav-logo{font-size:17px;}
+  .hero{min-height:420px;}
+  .hero-content{padding:0 18px;bottom:36px;}
+  .hero-left{max-width:100%;}
+  .hero-h1{font-size:clamp(26px,8vw,36px);}
+  .hero-sub{font-size:13px;}
+  .hero-method-card{display:none;}
+  .s-wrap{padding:48px 18px;}
+  .s-title{font-size:22px;}
+  .s-sub{font-size:13px;}
+  .steps{grid-template-columns:1fr;gap:16px;}
+  .cTrack{gap:12px;padding:0 18px 20px;}
+  .f-card{min-width:260px;}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:2px;}
+  .tarifs-grid{grid-template-columns:1fr;gap:16px;}
+  .p-card{padding:24px 20px;}
+  footer{padding:28px 18px 20px;}
+  .ft{flex-direction:column;gap:14px;}
+}
+
 @media(max-width:900px){
   .nav{padding:0 24px;}
   .nav-links{display:none;}

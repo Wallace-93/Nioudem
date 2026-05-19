@@ -17,7 +17,7 @@
 }
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--white);color:var(--deep);-webkit-font-smoothing:antialiased;}
-.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--bord);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:62px;}
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(24px);border-bottom:0.5px solid var(--bord);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:62px;position:relative;}
 .nav-logo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--deep);text-decoration:none;}
 .nav-logo span{color:var(--mid);}
 .nav-back{font-size:13px;color:var(--light);text-decoration:none;transition:color .2s;}
@@ -174,13 +174,92 @@ footer{background:var(--deep);border-top:0.5px solid rgba(181,212,244,.1);paddin
   .tarifs-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto;}
   .cta-bottom{padding:60px 24px;}footer{padding:28px 24px 20px;}.ft{flex-direction:column;align-items:flex-start;}
 }
+
+/* ── MOBILE 393px (Redmi Note 13 Pro) ── */
+@media(max-width:480px){
+  .nav{padding:0 16px;height:56px;}
+  .nav-logo{font-size:17px;}
+  .nav-back{font-size:12px;}
+  .nav-cta{font-size:12px;padding:7px 14px;}
+  .hero{padding:44px 18px 48px;}
+  .hero-inner{grid-template-columns:1fr;gap:0;}
+  .hero-card{display:none;}
+  .hero-h1{font-size:28px;}
+  .hero-sub{font-size:14px;}
+  .hero-meta{gap:12px;}
+  .hero-meta-item{font-size:12px;}
+  .hero-number{font-size:100px;top:-10px;left:-10px;}
+  .section{padding:48px 18px;}
+  .s-title{font-size:22px;}
+  .s-sub{font-size:13px;margin-bottom:32px;}
+  .outcomes-grid{grid-template-columns:1fr;gap:2px;}
+  .oc{padding:22px 18px;}
+  .programme{max-width:100%;}
+  .module-header{padding:16px 16px;gap:10px;}
+  .module-title{font-size:14px;}
+  .module-meta{display:none;}
+  .module-body{padding:0 16px 18px 44px;}
+  .tarifs-grid{grid-template-columns:1fr;gap:16px;max-width:100%;}
+  .p-card{padding:24px 20px;}
+  .p-amount{font-size:36px;}
+  .cta-bottom{padding:52px 18px;}
+  .cta-h2{font-size:24px;}
+  .quote-block{padding:10px 0 24px;}
+  .quote-text{font-size:18px;}
+  footer{padding:28px 18px 20px;}
+  .ft{flex-direction:column;gap:14px;}
+  .f-links{flex-wrap:wrap;gap:14px;}
+  /* Alert banner */
+  .alert-banner{padding:18px;}
+  .alert-inner{gap:12px;}
+  /* Key numbers */
+  .key-numbers{grid-template-columns:1fr 1fr;}
+  .kn-num{font-size:26px;}
+  /* Timeline */
+  .timeline::before{left:16px;}
+  .tl-dot{width:32px;height:32px;font-size:12px;}
+  .tl-item{gap:16px;}
+  /* Compare grid */
+  .compare-grid{grid-template-columns:1fr;}
+  /* Strategies */
+  .strategies-grid{grid-template-columns:1fr;}
+  /* Budget visual */
+  .budget-bar{height:48px;}
+  .budget-bar-seg{font-size:13px;}
+  .budget-legend{grid-template-columns:1fr;}
+  /* Simulator */
+  .sim-grid{grid-template-columns:1fr;}
+  .sim-results{grid-template-columns:1fr;}
+  /* Blockchain steps */
+  .blockchain-steps{grid-template-columns:1fr;}
+  .blockchain-steps::before{display:none;}
+  /* BTC stats */
+  .btc-stats{grid-template-columns:1fr 1fr;}
+  /* Risk grid */
+  .risk-grid{grid-template-columns:1fr;}
+  /* Concepts grid */
+  .concepts-grid{grid-template-columns:1fr 1fr;}
+  /* Tools grid */
+  .tools-grid{grid-template-columns:1fr;}
+  /* Products grid */
+  .products-grid{grid-template-columns:1fr;}
+  /* Eco grid */
+  .eco-grid{grid-template-columns:1fr 1fr;}
+  /* Early perks */
+  .early-perks-grid{grid-template-columns:1fr;}
+  .early-section{padding:48px 18px;}
+  /* Pyramid */
+  .pyramid-bar{margin:0!important;padding:14px 14px;}
+  .pyramid-title{font-size:14px;}
+  .pyramid-sub{font-size:11px;}
+}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <a href="index.html" class="nav-logo">Niou<span>Dem</span></a>
-  <a href="index.html#formations" class="nav-back">← Toutes les formations</a>
+  <a href="index.html" class="nav-back" style="position:absolute;left:50%;transform:translateX(-50%);">← Toutes les formations</a>
   <a href="index.html#forum" class="nav-cta">Commencer</a>
 </nav>
 
