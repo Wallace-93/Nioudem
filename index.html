@@ -61,9 +61,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--deep);-webkit-font
 /* ── HERO ── */
 .hero{position:relative;height:600px;overflow:hidden;}
 .hero-img{
-  width:100%;height:100%;object-fit:cover;object-position:center 20%;
+  width:100%;height:100%;object-fit:cover;object-position:center top;
   display:block;transition:transform 12s ease;
-  margin-top:-100px;height:calc(100% + 100px);
 }
 .hero:hover .hero-img{transform:scale(1.06);}
 .hero-overlay{
@@ -607,7 +606,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
 /* ── RESPONSIVE ── */
 /* ── MOBILE 393px ── */
 @media(max-width:480px){
-  .nav-mobile-vision{display:block;font-size:12px;color:var(--light);text-decoration:none;font-weight:400;white-space:nowrap;}
+  .nav-mobile-vision{display:block;font-size:12px;color:var(--light);text-decoration:none;font-weight:400;white-space:nowrap;position:absolute;left:50%;transform:translateX(-50%);}
   .nav-cta{font-size:11px;padding:7px 12px;white-space:nowrap;}
 }
 @media(max-width:480px){
@@ -680,7 +679,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
 <!-- HERO -->
 <div class="hero">
   <img class="hero-img" id="heroImg"
-    src="https://images.unsplash.com/photo-1758063974173-9478d27a9b4b?w=1800&q=90&auto=format&fit=crop&crop=bottom"
+    src="hero.jpg"
     alt="Gratte-ciels London district financier — NiouDem" loading="eager"
     onerror="ndFallback(this)" />
   <script>
@@ -794,7 +793,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
     <div class="carousel-track" id="cTrack">
       <div class="f-card" onclick="window.location='psychologie.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='psychologie.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=560&q=75&auto=format&fit=crop" alt="Psychologie financière" />
+          <img class="f-img" src="hero.jpg" alt="Psychologie financière" />
           <span class="f-badge deb">Débutant</span>
         </div>
         <div class="f-body">
@@ -806,7 +805,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
       </div>
       <div class="f-card" onclick="window.location='budget.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='budget.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=560&q=75&auto=format&fit=crop" alt="Budget" />
+          <img class="f-img" src="hero.jpg" alt="Budget" />
           <span class="f-badge deb">Débutant</span>
         </div>
         <div class="f-body">
@@ -818,7 +817,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
       </div>
       <div class="f-card" onclick="window.location='bourse.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='bourse.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=560&q=75&auto=format&fit=crop" alt="Bourse" />
+          <img class="f-img" src="hero.jpg" alt="Bourse" />
           <span class="f-badge int">Intermédiaire</span>
         </div>
         <div class="f-body">
@@ -830,7 +829,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
       </div>
       <div class="f-card" onclick="window.location='crypto.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='crypto.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=560&q=75&auto=format&fit=crop" alt="Bitcoin et cryptomonnaies" />
+          <img class="f-img" src="hero.jpg" alt="Bitcoin et cryptomonnaies" />
           <span class="f-badge int">Intermédiaire</span>
         </div>
         <div class="f-body">
@@ -842,7 +841,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
       </div>
       <div class="f-card" onclick="window.location='immobilier.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='immobilier.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=560&q=75&auto=format&fit=crop" alt="Immobilier" />
+          <img class="f-img" src="hero.jpg" alt="Immobilier" />
           <span class="f-badge int">Intermédiaire</span>
         </div>
         <div class="f-body">
@@ -854,7 +853,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
       </div>
       <div class="f-card" onclick="window.location='epargne.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='epargne.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=560&q=75&auto=format&fit=crop" alt="Épargne" />
+          <img class="f-img" src="hero.jpg" alt="Épargne" />
           <span class="f-badge deb">Débutant</span>
         </div>
         <div class="f-body">
@@ -866,7 +865,7 @@ footer{background:var(--deep);padding:56px 48px 32px;}
       </div>
       <div class="f-card" onclick="window.location='fiscalite.html'" style="cursor:pointer;">
         <div class="f-img-wrap" onclick="window.location='fiscalite.html'" style="cursor:pointer;">
-          <img class="f-img" src="https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=560&q=75&auto=format&fit=crop" alt="Fiscalité" />
+          <img class="f-img" src="hero.jpg" alt="Fiscalité" />
           <span class="f-badge adv">Avancé</span>
         </div>
         <div class="f-body">
