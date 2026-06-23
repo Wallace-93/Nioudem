@@ -1,9 +1,1 @@
-# Netlify redirects - flat structure
-/formations/monnaie      /monnaie.html       200
-/formations/psychologie  /psychologie.html   200
-/formations/budget       /budget.html        200
-/formations/bourse       /bourse.html        200
-/formations/crypto       /crypto.html        200
-/formations/immobilier   /immobilier.html    200
-/formations/epargne      /epargne.html       200
-/formations/fiscalite    /fiscalite.html     200
+/* /index.html 200
