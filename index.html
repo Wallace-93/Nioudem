@@ -1,556 +1,699 @@
 <!DOCTYPE html>
-<html lang="fr" id="html-root">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NiouDem, On y va.</title>
+<title>NiouDem — L'éducation financière, une petite action à la fois</title>
+<meta name="description" content="NiouDem, « on y va » en wolof. Des leçons courtes, une action concrète à chaque fois, et quelqu'un à qui poser ses questions. Trois tarifs, pour que le prix n'écarte personne.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital, wght@0,700;0,800;0,900;1,700;1,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
 :root{
-  --ink:#0F0F0E;--ink-soft:#2a2a28;--ink-muted:#6b6b67;
-  --sand:#FAFAF7;--sand-mid:#F2F2EE;--sand-dark:#E8E8E3;
-  --gold:#C4922A;--gold-light:#E8B84B;--gold-pale:#FBF3E3;
-  --terra:#B85C38;--terra-pale:#FDEEE8;
-  --white:#FFFFFF;
-  --serif:'Playfair Display', Georgia, serif;
-  --sans:'Inter', system-ui,-apple-system, sans-serif;
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --brique:#A24332;--brique-clair:#F8EDEA;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --lg:1120px;
 }
+
 html{scroll-behavior:smooth;}
-body{font-family:var(--sans);background:var(--sand);color:var(--ink);-webkit-font-smoothing:antialiased;}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+img{max-width:100%;display:block;}
 
-/* ── NAV ── */
-.nav{position:sticky;top:0;z-index:200;background:rgba(250,250,247,.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--sand-dark);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-.nav-logo{font-family:var(--serif);font-size:22px;font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-.02em;}
-.nav-logo em{font-style:italic;color:var(--gold);}
-.nav-links{display:flex;gap:36px;list-style:none;margin-left:52px;}
-.nav-links a{font-size:13px;color:var(--ink-muted);text-decoration:none;font-weight:400;transition:color .2s;}
-.nav-links a:hover{color:var(--ink);}
-.nav-right{display:flex;align-items:center;gap:20px;margin-left:auto;}
-.lang-switch{display:flex;gap:0;border:1px solid var(--sand-dark);border-radius:6px;overflow:hidden;}
-.lang-btn{font-size:11px;font-weight:500;padding:5px 10px;cursor:pointer;border:none;background:transparent;font-family:var(--sans);color:var(--ink-muted);transition:background .15s, color .15s;}
-.lang-btn.active{background:var(--ink);color:var(--white);}
-.nav-cta{background:var(--gold);color:var(--white);font-size:13px;font-weight:600;padding:9px 22px;border-radius:8px;text-decoration:none;transition:background .2s;display:inline-block;letter-spacing:.01em;}
-.nav-cta:hover{background:var(--gold-light);}
+.display{font-family:var(--display);color:var(--encre);font-weight:500;letter-spacing:-.015em;line-height:1.14;}
+h1.display{font-size:clamp(38px,5.4vw,60px);}
+h2.display{font-size:clamp(28px,3.6vw,40px);}
+h3{font-family:var(--display);font-weight:600;color:var(--encre);font-size:19px;line-height:1.3;letter-spacing:-.01em;}
+.lede{font-size:17.5px;color:var(--encre-2);max-width:58ch;}
 
-/* ── HERO ── */
-.hero{background:var(--ink);min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px;position:relative;overflow:hidden;}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(196,146,42,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(196,146,42,.04) 1px, transparent 1px);background-size:60px 60px;pointer-events:none;}
-.hero-glow{position:absolute;bottom:-200px;right:-100px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle, rgba(196,146,42,.12) 0%, transparent 65%);pointer-events:none;}
-.hero-inner{max-width:960px;margin:0 auto;width:100%;position:relative;z-index:2;}
-.hero-word{display:inline-flex;align-items:center;gap:12px;margin-bottom:28px;}
-.hero-wolof{font-size:12px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(196,146,42,.6);}
-.hero-wolof-text{font-size:12px;font-weight:300;color:rgba(255,255,255,.3);font-style:italic;}
-.hero-h1{font-family:var(--serif);font-size:clamp(44px,8vw,96px);font-weight:900;letter-spacing:-.04em;line-height:.98;color:var(--white);margin-bottom:32px;}
-.hero-h1 em{font-style:italic;color:var(--gold);}
-.hero-h1 .hero-tagline{display:block;font-size:clamp(18px,2.5vw,28px);font-weight:300;font-style:normal;color:rgba(255,255,255,.45);letter-spacing:-.01em;margin-top:16px;font-family:var(--sans);}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);}
-.hero-desc{font-size:16px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.75;max-width:440px;}
-.hero-desc strong{color:rgba(255,255,255,.85);font-weight:500;}
-.hero-actions{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
-.btn-gold{background:var(--gold);color:var(--white);font-family:var(--sans);font-size:15px;font-weight:600;padding:15px 36px;border-radius:8px;text-decoration:none;transition:background .2s, transform .15s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border:none;cursor:pointer;}
-.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);}
-.btn-outline{background:transparent;color:rgba(255,255,255,.5);font-family:var(--sans);font-size:14px;font-weight:300;padding:0;text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;}
-.btn-outline:hover{color:rgba(255,255,255,.85);}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--laiton);display:flex;align-items:center;gap:9px;margin-bottom:18px;}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--laiton);flex:none;}
+.eyebrow.center{justify-content:center;}
 
-/* ── SECTIONS ── */
-.section{padding:96px 48px;}
-.section-sand{background:var(--sand);}
-.section-white{background:var(--white);}
-.section-mid{background:var(--sand-mid);}
-.section-ink{background:var(--ink);}
-.s-inner{max-width:960px;margin:0 auto;}
-.s-tag{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
-.s-tag-light{color:rgba(196,146,42,.6);}
-.s-title{font-family:var(--serif);font-size:clamp(28px,4.5vw,48px);font-weight:800;letter-spacing:-.04em;line-height:1.08;color:var(--ink);margin-bottom:18px;}
-.s-title-light{color:var(--white);}
-.s-title em{font-style:italic;}
-.s-sub{font-size:16px;font-weight:300;color:var(--ink-muted);line-height:1.8;max-width:520px;margin-bottom:56px;}
-.s-sub-light{color:rgba(255,255,255,.45);}
-
-/* ── HISTOIRE ── */
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.story-text p{font-size:17px;font-weight:300;color:var(--ink-muted);line-height:1.9;margin-bottom:22px;}
-.story-text p:last-child{margin-bottom:0;}
-.story-text strong{color:var(--ink);font-weight:500;}
-.story-text em{color:var(--gold);font-style:italic;}
-.story-aside{display:flex;flex-direction:column;gap:24px;}
-.story-quote{border-left:2px solid var(--gold);padding:20px 24px;background:var(--gold-pale);border-radius:0 10px 10px 0;}
-.sq-text{font-family:var(--serif);font-size:20px;font-weight:700;font-style:italic;color:var(--ink);line-height:1.35;letter-spacing:-.02em;}
-.sq-origin{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:12px;}
-
-/* ── ÉMANCIPATION ── */
-.emancipation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--sand-dark);border-radius:16px;overflow:hidden;}
-.em-card{background:var(--white);padding:40px 32px;transition:background .2s;}
-.em-card:hover{background:var(--gold-pale);}
-.em-icon{font-size:32px;margin-bottom:20px;}
-.em-title{font-family:var(--serif);font-size:22px;font-weight:800;color:var(--ink);margin-bottom:10px;letter-spacing:-.03em;}
-.em-desc{font-size:14px;font-weight:300;color:var(--ink-muted);line-height:1.75;}
-.em-desc strong{color:var(--ink);font-weight:500;}
-
-/* ── POUR QUI ── */
-.forwhom-list{display:flex;flex-direction:column;gap:0;max-width:780px;}
-.fw-item{display:grid;grid-template-columns:40px 1fr;gap:24px;padding:32px 0;border-bottom:1px solid var(--sand-dark);}
-.fw-item:last-child{border-bottom:none;}
-.fw-num{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--gold);padding-top:4px;}
-.fw-content{}
-.fw-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em;}
-.fw-voice{font-size:15px;font-style:italic;font-weight:300;color:var(--ink-muted);line-height:1.7;padding-left:16px;border-left:2px solid var(--sand-dark);margin-bottom:10px;}
-.fw-answer{font-size:14px;font-weight:300;color:var(--ink-muted);line-height:1.7;}
-.fw-answer strong{color:var(--ink);font-weight:500;}
-
-/* ── FORMATIONS ── */
-.formations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--sand-dark);border-radius:16px;overflow:hidden;}
-.f-card{background:var(--white);padding:28px 22px;cursor:pointer;transition:background .15s;}
-.f-card:hover{background:var(--gold-pale);}
-.fc-num{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--gold);margin-bottom:12px;}
-.fc-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em;line-height:1.3;}
-.fc-desc{font-size:13px;font-weight:300;color:var(--ink-muted);line-height:1.6;margin-bottom:14px;}
-.fc-meta{font-size:12px;color:var(--sand-dark);}
-.fc-arrow{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:500;color:var(--gold);margin-top:14px;transition:gap .2s;}
-.f-card:hover .fc-arrow{gap:8px;}
-
-/* ── COMMUNAUTÉ ── */
-.community-inner{max-width:780px;margin:0 auto;}
-.community-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-bottom:64px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.08);}
-.cs-item{text-align:center;}
-.cs-num{font-family:var(--serif);font-size:48px;font-weight:800;color:var(--gold);letter-spacing:-.04em;line-height:1;}
-.cs-label{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);margin-top:6px;line-height:1.5;}
-.community-text{text-align:center;}
-.ct-title{font-family:var(--serif);font-size:clamp(22px,3.5vw,34px);font-weight:800;color:var(--white);letter-spacing:-.03em;line-height:1.2;margin-bottom:16px;}
-.ct-title em{font-style:italic;color:var(--gold);}
-.ct-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.75;max-width:480px;margin:0 auto;}
-
-/* ── TARIFS ── */
-.pricing-wrap{max-width:720px;margin:0 auto;}
-.pricing-header{text-align:center;margin-bottom:48px;}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.p-card{border:1px solid var(--sand-dark);border-radius:14px;padding:36px 28px;background:var(--white);transition:transform .2s, box-shadow .2s;}
-.p-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.06);}
-.p-card.main{background:var(--ink);border-color:var(--ink);}
-.p-card.main:hover{box-shadow:0 12px 40px rgba(0,0,0,.22);}
-.p-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:6px;margin-bottom:18px;}
-.p-badge.free{background:var(--gold-pale);color:var(--gold);}
-.p-badge.club{background:var(--gold);color:var(--white);}
-.p-name{font-family:var(--serif);font-size:22px;font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.03em;}
-.p-card.main .p-name{color:var(--white);}
-.p-desc{font-size:13px;font-weight:300;color:var(--ink-muted);margin-bottom:20px;line-height:1.65;}
-.p-card.main .p-desc{color:rgba(255,255,255,.4);}
-.p-price{display:flex;align-items:flex-end;gap:4px;margin-bottom:4px;}
-.p-amount{font-family:var(--serif);font-size:48px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1;}
-.p-card.main .p-amount{color:var(--gold);}
-.p-cur{font-size:20px;font-weight:600;color:var(--ink-muted);margin-bottom:7px;}
-.p-card.main .p-cur{color:rgba(196,146,42,.6);}
-.p-period{font-size:13px;font-weight:300;color:var(--ink-muted);margin-bottom:24px;}
-.p-card.main .p-period{color:rgba(255,255,255,.3);}
-.p-features{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px;}
-.p-features li{font-size:13px;font-weight:300;color:var(--ink-muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
-.p-card.main .p-features li{color:rgba(255,255,255,.5);}
-.p-features li::before{content:'\2713';color:var(--gold);font-weight:600;font-size:12px;margin-top:1px;flex-shrink:0;}
-.p-btn{width:100%;background:var(--sand-mid);color:var(--ink);border:1px solid var(--sand-dark);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;padding:13px;border-radius:8px;transition:background .2s;text-align:center;text-decoration:none;display:block;}
-.p-btn:hover{background:var(--sand-dark);}
-.p-card.main .p-btn{background:var(--gold);color:var(--white);border-color:var(--gold);}
-.p-card.main .p-btn:hover{background:var(--gold-light);}
-.pricing-footer{text-align:center;font-size:13px;font-weight:300;color:var(--ink-muted);margin-top:24px;line-height:1.65;}
-
-/* ── CTA FINAL ── */
-.cta-inner{max-width:640px;margin:0 auto;text-align:center;}
-.cta-title{font-family:var(--serif);font-size:clamp(32px,6vw,64px);font-weight:900;letter-spacing:-.04em;line-height:1.0;color:var(--white);margin-bottom:18px;}
-.cta-title em{font-style:italic;color:var(--gold);}
-.cta-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.75;margin-bottom:40px;}
-.cta-note{font-size:13px;color:rgba(255,255,255,.25);margin-top:14px;}
-.cta-note a{color:rgba(196,146,42,.6);text-decoration:underline;}
-
-/* ── FOOTER ── */
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:40px 48px 28px;}
-.ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-.ft-logo{font-family:var(--serif);font-size:20px;font-weight:800;color:var(--white);}
-.ft-logo em{font-style:italic;color:var(--gold);}
-.ft-links{display:flex;gap:28px;}
-.ft-links a{font-size:12px;font-weight:300;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;}
-.ft-links a:hover{color:rgba(255,255,255,.6);}
-.ft-copy{font-size:11px;color:rgba(255,255,255,.15);}
-
-.gam-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--bord);border-radius:20px;overflow:hidden;max-width:960px;}
-.gam-card{background:var(--white);padding:30px 24px;transition:background .2s;}
-.gam-card:hover{background:var(--gold-pale);}
-.gam-icon{font-size:24px;margin-bottom:14px;color:var(--gold);}
-.gam-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em;}
-.gam-desc{font-size:12.5px;font-weight:300;color:var(--ink-muted);line-height:1.65;}
-
-/* ── RESPONSIVE ── */
-@media(max-width:860px){
-  .nav{padding:0 24px;}.nav-links{display:none;}
-  .hero{padding:0 24px 56px;min-height:80vh;}
-  .hero-bottom{flex-direction:column;align-items:flex-start;gap:28px;}
-  .hero-actions{align-items:flex-start;}
-  .section{padding:64px 24px;}
-  .story-grid{grid-template-columns:1fr;gap:40px;}
-  .emancipation-grid{grid-template-columns:1fr;}
-  .gam-grid{grid-template-columns:1fr 1fr;}
-  .formations-grid{grid-template-columns:1fr 1fr;}
-  .community-stats{grid-template-columns:1fr;gap:24px;}
-  .pricing-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto;}
-  footer{padding:28px 24px 20px;}.ft{flex-direction:column;align-items:flex-start;}
+/* ===== LE REFRAIN — signature de marque =====
+   « NiouDem » veut dire « on y va ». Le nom est donc déjà une phrase :
+   on s'en sert comme ponctuation, à la fin de chaque acte de la page. */
+.refrain{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:52px;font-family:var(--display);font-size:22px;font-weight:600;
+  color:var(--laiton);letter-spacing:-.01em;
 }
-@media(max-width:480px){
-  .nav{padding:0 16px;height:56px;}
-  .nav-logo{font-size:18px;}
-  .nav-cta{font-size:12px;padding:8px 16px;}
-  .lang-switch{display:none;}
-  .hero{padding:0 18px 48px;min-height:75vh;}
-  .hero-h1{font-size:38px;}
-  .section{padding:48px 18px;}
-  .s-title{font-size:26px;}
-  .formations-grid{grid-template-columns:1fr;}
-  .cs-num{font-size:36px;}
-  .ft-links{flex-wrap:wrap;gap:14px;}
-}
+.refrain::before,.refrain::after{content:"";height:1px;width:48px;background:var(--laiton);opacity:.45;}
+
+/* ---------- Navigation ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(252,251,248,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--trait);}
+.nav-in{max-width:var(--lg);margin:0 auto;padding:15px 24px;display:flex;align-items:center;gap:30px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none;}
+.nav-mark{width:28px;height:28px;border-radius:7px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark svg{width:15px;height:15px;}
+.nav-name{font-family:var(--display);font-size:19px;font-weight:600;color:var(--encre);letter-spacing:-.02em;}
+.nav-name em{font-style:normal;color:var(--laiton);}
+.nav-links{list-style:none;display:flex;gap:24px;margin-left:auto;}
+.nav-links a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--encre-2);padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .18s,color .18s;}
+.nav-links a:hover{color:var(--encre);border-bottom-color:var(--laiton);}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-login{text-decoration:none;font-size:14.5px;font-weight:600;color:var(--encre);white-space:nowrap;}
+.nav-cta{text-decoration:none;background:var(--pin);color:#fff;font-size:14px;font-weight:600;padding:9px 17px;border-radius:7px;white-space:nowrap;transition:background .18s;}
+.nav-cta:hover{background:#173C30;}
+@media(max-width:940px){.nav-links{display:none;}.nav-in{gap:14px;}.nav-right{margin-left:auto;}.nav-login{display:none;}}
+
+/* ---------- Sections ---------- */
+.section{padding:88px 24px;}
+.section-soft{background:var(--papier-2);border-top:1px solid var(--trait);border-bottom:1px solid var(--trait);}
+.section-encre{background:var(--encre);color:#B7C3CA;}
+.section-encre .display{color:#fff;}
+.section-encre .lede{color:#B7C3CA;}
+.s-inner{max-width:var(--lg);margin:0 auto;}
+.s-head{max-width:62ch;margin-bottom:44px;}
+.s-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.s-head .display{margin-bottom:14px;}
+@media(max-width:640px){.section{padding:62px 20px;}}
+
+.btn-primary{display:inline-block;text-decoration:none;background:var(--pin);color:#fff;font-size:15.5px;font-weight:600;padding:14px 26px;border-radius:8px;transition:background .18s,transform .18s;}
+.btn-primary:hover{background:#173C30;transform:translateY(-1px);}
+.btn-ghost{display:inline-block;text-decoration:none;color:var(--encre);border:1px solid var(--trait);background:var(--papier);font-size:15.5px;font-weight:600;padding:14px 22px;border-radius:8px;transition:border-color .18s;}
+.btn-ghost:hover{border-color:var(--encre-3);}
+
+/* ---------- Hero ---------- */
+.hero{padding:60px 24px 76px;}
+.hero-in{max-width:var(--lg);margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;}
+.hero-h1{margin-bottom:20px;max-width:15ch;}
+.hero-h1 em{font-style:normal;color:var(--pin);}
+.hero-nom{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--encre-3);margin-bottom:26px;}
+.hero-nom strong{color:var(--laiton);font-weight:500;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:24px;}
+.hero-trust{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--mono);font-size:12.5px;color:var(--encre-3);}
+.hero-trust span{display:flex;align-items:center;gap:7px;}
+.hero-trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--laiton);flex:none;}
+@media(max-width:940px){.hero-in{grid-template-columns:1fr;gap:42px;}.hero-h1{max-width:none;}}
+
+/* ---------- Le carnet de route ---------- */
+.carnet{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:26px 26px 22px;box-shadow:0 1px 2px rgba(18,33,43,.04),0 14px 38px -24px rgba(18,33,43,.32);}
+.carnet-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-bottom:13px;border-bottom:1px solid var(--trait);margin-bottom:4px;}
+.carnet-titre{font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--encre);}
+.carnet-note{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-3);}
+.ligne{display:grid;grid-template-columns:26px 1fr auto;gap:15px;align-items:start;padding:15px 0;border-bottom:1px solid var(--trait);}
+.ligne:last-of-type{border-bottom:0;}
+.case{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--trait);background:var(--papier);display:grid;place-items:center;margin-top:2px;flex:none;}
+.case svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:opacity .3s,transform .3s;}
+.ligne.faite .case{background:var(--laiton);border-color:var(--laiton);}
+.ligne.faite .case svg{opacity:1;transform:scale(1);}
+.ligne-action{font-size:15.5px;color:var(--encre);font-weight:500;}
+.ligne-effet{font-size:14px;color:var(--encre-3);margin-top:2px;}
+.ligne-date{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);white-space:nowrap;margin-top:4px;}
+.ligne.a-faire{cursor:pointer;border-radius:8px;padding-left:8px;padding-right:8px;margin-left:-8px;margin-right:-8px;transition:background .18s;}
+.ligne.a-faire:hover{background:var(--laiton-clair);}
+.ligne.a-faire .case{border-color:var(--laiton);border-style:dashed;}
+.ligne.a-faire .ligne-action{color:var(--pin);}
+.carnet-pied{margin-top:16px;padding-top:15px;border-top:1px dashed var(--trait);font-size:14.5px;color:var(--encre-2);display:none;}
+.carnet-pied.visible{display:block;animation:apparait .45s ease-out;}
+.carnet-pied strong{color:var(--encre);font-weight:600;}
+.carnet-pied a{color:var(--pin);font-weight:600;}
+@keyframes apparait{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;}}
+
+/* ---------- Les obstacles ---------- */
+.obstacles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;}
+.obstacle{background:var(--encre);padding:30px 26px 32px;}
+.obstacle-n{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:14px;}
+.obstacle h3{color:#fff;margin-bottom:10px;}
+.obstacle p{font-size:14.8px;color:#B7C3CA;}
+@media(max-width:820px){.obstacles{grid-template-columns:1fr;}}
+
+/* ---------- Grilles ---------- */
+.grille-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;}
+.carte{background:var(--papier);padding:28px 24px 30px;}
+.carte-num{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:14px;}
+.carte h3{margin-bottom:9px;}
+.carte p{font-size:14.8px;}
+@media(max-width:900px){.grille-4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.grille-4{grid-template-columns:1fr;}}
+
+/* ---------- Formations ---------- */
+.formations-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;}
+.f-card{background:var(--papier);padding:24px 22px 26px;cursor:pointer;position:relative;transition:background .18s;}
+.f-card:hover{background:var(--papier-2);}
+.f-card.locked{opacity:.62;}
+.f-hublot{position:absolute;top:20px;right:20px;width:7px;height:7px;border-radius:50%;background:var(--trait);}
+.f-hublot.on{background:var(--pin);}
+.fc-num{font-family:var(--mono);font-size:12px;color:var(--laiton);margin-bottom:14px;}
+.fc-title{font-family:var(--display);font-size:17px;font-weight:600;color:var(--encre);line-height:1.28;margin-bottom:7px;}
+.fc-desc{font-size:14px;color:var(--encre-2);margin-bottom:12px;}
+.fc-meta{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);}
+@media(max-width:1000px){.formations-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.formations-grid{grid-template-columns:1fr;}}
+
+/* ---------- Accompagnement ---------- */
+.accomp{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+/* Carte d'échange : même traitement que le carnet, pour que les deux
+   éléments signature se répondent d'un bout à l'autre de la page. */
+.echange{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:24px 24px 22px;
+  box-shadow:0 1px 2px rgba(18,33,43,.04),0 14px 38px -24px rgba(18,33,43,.3);}
+.echange-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--encre-3);padding-bottom:14px;border-bottom:1px solid var(--trait);margin-bottom:18px;}
+.bulle{margin-bottom:16px;}
+.bulle-qui{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--encre-3);margin-bottom:6px;}
+.bulle-txt{font-size:15px;line-height:1.6;color:var(--encre);background:var(--papier-2);
+  border-radius:10px 10px 10px 3px;padding:13px 15px;}
+.bulle.reponse .bulle-qui{color:var(--pin);}
+.bulle.reponse .bulle-txt{background:var(--pin-clair);border-radius:10px 10px 3px 10px;}
+.echange-pied{border-top:1px dashed var(--trait);padding-top:14px;font-size:13.5px;color:var(--encre-3);}
+.accomp ul{list-style:none;margin-top:22px;display:grid;gap:14px;}
+.accomp li{padding-left:28px;position:relative;font-size:15.5px;}
+.accomp li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:4px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
+.accomp li strong{color:var(--encre);font-weight:600;}
+@media(max-width:860px){.accomp{grid-template-columns:1fr;gap:32px;}}
+
+/* ---------- Tarifs ---------- */
+.tarif-intro{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:12px;padding:24px 26px;max-width:760px;margin-bottom:32px;}
+.tarif-intro h3{margin-bottom:9px;}
+.tarif-intro p{font-size:15px;color:#7A5A12;}
+.tarif-intro strong{color:#5E4409;font-weight:700;}
+.tarifs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.tarif{background:var(--papier);border:1px solid var(--trait);border-radius:12px;padding:28px 24px 30px;display:flex;flex-direction:column;}
+.tarif.mis-en-avant{border-color:var(--pin);box-shadow:0 14px 40px -30px rgba(30,75,60,.55);}
+.tarif-nom{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--encre-3);margin-bottom:14px;}
+.tarif.mis-en-avant .tarif-nom{color:var(--pin);}
+.tarif-prix{font-family:var(--display);font-size:42px;font-weight:500;color:var(--encre);line-height:1;}
+.tarif-pour{font-size:14px;color:var(--encre-2);margin-top:12px;margin-bottom:18px;min-height:44px;}
+.tarif ul{list-style:none;display:grid;gap:8px;margin-bottom:24px;}
+.tarif li{font-size:14.5px;padding-left:20px;position:relative;}
+.tarif li::before{content:"";position:absolute;left:0;top:8px;width:12px;height:12px;border-radius:3px;background:var(--laiton-clair);border:1px solid #E4D2AC;}
+.tarif .btn-primary,.tarif .btn-ghost{margin-top:auto;text-align:center;}
+.tarif-note{font-family:var(--mono);font-size:12px;color:var(--encre-3);margin-top:20px;line-height:1.7;max-width:74ch;}
+@media(max-width:860px){.tarifs{grid-template-columns:1fr;}.tarif-pour{min-height:0;}}
+
+/* ---------- Cadre ---------- */
+.cadre{border-left:3px solid var(--brique);background:var(--brique-clair);border-radius:0 10px 10px 0;padding:26px 28px 28px;max-width:760px;}
+.cadre h3{margin-bottom:12px;}
+.cadre p{font-size:15px;}
+.cadre p + p{margin-top:11px;}
+.cadre strong{color:var(--encre);font-weight:600;}
+
+/* ---------- Questions ---------- */
+.questions{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:12px;overflow:hidden;}
+.question{background:var(--papier);padding:26px 24px 28px;}
+.question h3{margin-bottom:9px;font-size:17px;}
+.question p{font-size:14.8px;}
+@media(max-width:760px){.questions{grid-template-columns:1fr;}}
+
+/* ---------- Clôture ---------- */
+.cloture{text-align:center;max-width:620px;margin:0 auto;}
+.cloture .display{margin-bottom:16px;}
+.cloture p{margin-bottom:28px;font-size:17px;}
+
+/* ---------- Pied de page ---------- */
+footer{background:var(--encre);color:#B7C3CA;padding:52px 24px 40px;}
+.ft{max-width:var(--lg);margin:0 auto;}
+.ft-haut{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12);}
+.ft-brand{display:flex;align-items:center;gap:10px;}
+.ft-name{font-family:var(--display);font-size:19px;font-weight:600;color:#fff;letter-spacing:-.02em;}
+.ft-name em{font-style:normal;color:var(--laiton);}
+.ft-links{display:flex;flex-wrap:wrap;gap:20px;}
+.ft-links a{text-decoration:none;font-size:14px;color:#B7C3CA;}
+.ft-links a:hover{color:#fff;}
+.ft-mentions{font-size:13px;line-height:1.7;margin-top:22px;max-width:70ch;color:#8FA0A9;}
+.ft-copy{font-family:var(--mono);font-size:11.5px;color:#7A8A93;margin-top:20px;}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
-  <a href="#" class="nav-logo">Niou<em>Dem</em></a>
-  <ul class="nav-links">
-    <li><a href="#histoire">Notre histoire</a></li>
-    <li><a href="#formations">Formations</a></li>
-    <li><a href="#communaute">Communauté</a></li>
-    <li><a href="#tarifs">Tarifs</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="lang-switch">
-      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('wo')">WO</button>
-      <button class="lang-btn" onclick="setLang('sn')">SN</button>
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="nav-name">Niou<em>Dem</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#constat">Le constat</a></li>
+      <li><a href="#methode">La méthode</a></li>
+      <li><a href="#formations">Formations</a></li>
+      <li><a href="#accompagnement">Accompagnement</a></li>
+      <li><a href="#tarifs">Tarifs</a></li>
+    </ul>
+    <div class="nav-right" id="navRight">
+      <a href="connexion.html" class="nav-login">Se connecter</a>
+      <a href="inscription.html" class="nav-cta">Commencer</a>
     </div>
-    <a href="#tarifs" class="nav-cta" data-fr="Commencer" data-en="Get started">Commencer</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ============ HERO ============ -->
 <div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-word">
-      <span class="hero-wolof">NiouDem</span>
-      <span class="hero-wolof-text" data-fr=", « on y va » en wolof" data-en=", « let's go » in Wolof">, « on y va » en wolof</span>
-    </div>
-    <h1 class="hero-h1">
-      Apprendre la finance pour changer<br>votre rapport à l'argent ?<br><em>Ok, NiouDem.</em>
-      <span class="hero-tagline" data-fr="Prendre le contrôle de ses finances. Construire son patrimoine. S'émanciper." data-en="Take control of your finances. Build your wealth. Emancipate yourself.">Prendre le contrôle de ses finances. Construire son patrimoine. S'émanciper.</span>
-    </h1>
-    <div class="hero-bottom">
-      <p class="hero-desc" data-fr="L'éducation financière de qualité reste rare, précieuse, et pourtant indispensable. Encore plus quand la langue, la complexité du système ou l'absence de bons contacts s'ajoutent aux obstacles habituels. <strong>NiouDem existe pour combler cet écart.</strong>" data-en="Quality financial education remains rare, valuable, yet essential. Even more so when language, system complexity, or the lack of the right contacts add to the usual obstacles. <strong>NiouDem exists to close that gap.</strong>" data-wo="Jangale ci xaalis bu rafet du am bu bari, te am solo bu rey, waaye dafa wara am. Lu epp na bu lakk bi, walla mengale bu jefandikoo wall, walla amul jefandikukat yu baax. <strong>NiouDem dafa nekk ngir jelee loolu.</strong>" data-sn="Karanteyaaxun xaalisi nayinte, da xeere bare, koota beydiri keterande. A beyno fo lakka, walla mengalu jaaye fote, walla maxa fo dunkutu xine soninke. <strong>NiouDem ti ye xeere yi xanbi.</strong>">L'éducation financière de qualité reste rare, précieuse, et pourtant indispensable. Encore plus quand la langue, la complexité du système ou l'absence de bons contacts s'ajoutent aux obstacles habituels. <strong>NiouDem existe pour combler cet écart.</strong></p>
+  <div class="hero-in">
+    <div>
+      <div class="eyebrow">Éducation financière</div>
+      <h1 class="display hero-h1">Tu n'as rien à rattraper. Juste <em>une action</em> à cocher.</h1>
+      <p class="hero-nom"><strong>NiouDem</strong> — « on y va », en wolof.</p>
+      <p class="lede" style="margin-bottom:30px;">Des leçons de cinq minutes, une vérification, et une chose concrète à faire dans la vraie vie. Plus quelqu'un à qui poser tes questions sans avoir à faire semblant de savoir.</p>
       <div class="hero-actions">
-        <a href="#tarifs" class="btn-gold" data-fr="On y va, 25 € →" data-en="Let's go, 25 € →" data-wo="Nu dem, 25 € →" data-sn="No taxa, 25 € →">On y va, 25 € →</a>
-        <a href="#histoire" class="btn-outline" data-fr="Le constat ↓" data-en="The reality ↓" data-wo="Lu xewoon ↓" data-sn="Xabaare ↓">Le constat ↓</a>
+        <a href="inscription.html" class="btn-primary">Ouvrir la première leçon</a>
+        <a href="#methode" class="btn-ghost">Voir comment ça marche</a>
+      </div>
+      <div class="hero-trust">
+        <span>Première formation entière, gratuite</span>
+        <span>Sans carte bancaire</span>
+        <span>Aucune promesse de rendement</span>
+      </div>
+    </div>
+
+    <div class="carnet">
+      <div class="carnet-head">
+        <div class="carnet-titre">Carnet de route</div>
+        <div class="carnet-note">Semaine 3</div>
+      </div>
+
+      <div class="ligne faite">
+        <span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <div class="ligne-action">Résilier deux abonnements oubliés</div>
+          <div class="ligne-effet">17 € par mois qui reviennent</div>
+        </div>
+        <div class="ligne-date">Lun.</div>
+      </div>
+
+      <div class="ligne faite">
+        <span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <div class="ligne-action">Calculer son reste à vivre réel</div>
+          <div class="ligne-effet">Un chiffre enfin connu, au lieu d'une intuition</div>
+        </div>
+        <div class="ligne-date">Mer.</div>
+      </div>
+
+      <div class="ligne a-faire" id="ligneAFaire" role="button" tabindex="0" aria-pressed="false">
+        <span class="case"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <div class="ligne-action">Comprendre pourquoi 100 € valent moins qu'avant</div>
+          <div class="ligne-effet">Leçon 1 · 5 minutes · à cocher toi-même</div>
+        </div>
+        <div class="ligne-date">Auj.</div>
+      </div>
+
+      <div class="carnet-pied" id="carnetPied">
+        <strong>Voilà, c'était ça.</strong> Une petite action, cochée. Répète-la trente fois et tu ne reconnaîtras plus ta situation. <a href="inscription.html">On y va →</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- LE CONSTAT -->
-<section class="section section-sand" id="histoire">
+<!-- ============ LE CONSTAT ============ -->
+<section class="section section-encre" id="constat">
   <div class="s-inner">
-    <div class="story-grid">
-      <div class="story-text">
-        <div class="s-tag" data-fr="Le constat" data-en="The reality" data-wo="Lu xewoon" data-sn="Xabaare">Le constat</div>
-        <h2 class="s-title" data-fr="Un savoir rare.<br>Pourtant <em>essentiel.</em>" data-en="Rare knowledge.<br>Yet <em>essential.</em>" data-wo="Xam-xam bu wow.<br>Waaye <em>am solo.</em>" data-sn="Kallaame fanaande.<br>Konye <em>xaranteyaaxun.</em>">Un savoir rare.<br>Pourtant <em>essentiel.</em></h2>
-        <p data-fr="L'éducation financière manque à la majorité des gens, peu importe leur origine. Mais pour la diaspora et les communautés qui lui ressemblent, d'autres obstacles s'ajoutent souvent au tableau." data-en="Financial education is missing for most people, regardless of background. But for the diaspora and similar communities, other obstacles often add to the picture." data-wo="Xam-xam ci xaalis dafa wow ci ñépp, lu mu doon askan wi. Waaye ci jëfandikukat yi génn ci réew mi ak ñu ni leen, lu ëpp dafay teew." data-sn="Karanteyaaxun xaalisi a dunkutu fo a beyno, ñaxaaxa bare. Konye, beydaane yi a fote ñaane ye ñaxaaxa yi naane, lu doon a beydoore.">L'éducation financière manque à la majorité des gens, peu importe leur origine. Mais pour la diaspora et les communautés qui lui ressemblent, d'autres obstacles s'ajoutent souvent au tableau.</p>
-        <p data-fr="La langue financière elle-même peut être une barrière. Les démarches administratives, les contrats, les conditions générales, tout est pensé pour des gens qui maîtrisent déjà les codes." data-en="The financial language itself can be a barrier. Paperwork, contracts, terms and conditions, everything is designed for people who already master the codes." data-wo="Làkk wi ñu jëfandikoo ci xaalis moo man a doon benn jàll. Xaymu yi, kontaru yi, sàrt yu mag yi, lépp dañu leen def ngir ñi xam ba noppi sàrtu yi." data-sn="Lakka karandi xaalisi fote, ti ye fo ye jaalle. Sariyandi yi, kontrato yi, sarti baane yi, fo lette ñaane ye yi a fote sarti dunkutu.">La langue financière elle-même peut être une barrière. Les démarches administratives, les contrats, les conditions générales, tout est pensé pour des gens qui maîtrisent déjà les codes.</p>
-        <p data-fr="Le système financier est volontairement complexe. Comprendre un placement, une fiscalité ou un crédit demande du temps, et souvent un accompagnement que tout le monde n'a pas la chance d'avoir." data-en="The financial system is deliberately complex. Understanding an investment, a tax rule or a loan takes time, and often guidance that not everyone has the chance to access." data-wo="Sàrtu xaalis bi dafa metti, lu booloo ak yéene. Xam benn jëf, juutaay walla wàllu, dafay laaj jamono, ak ndimbal bu mëneeñu kenn am." data-sn="Sariyandi xaalisi a doon koota. Karanteyandi benn dunkuye, lampoore, ye boore, fo wonkilla jamano, ak yamaande maxa fo a sento.">Le système financier est volontairement complexe. Comprendre un placement, une fiscalité ou un crédit demande du temps, et souvent un accompagnement que tout le monde n'a pas la chance d'avoir.</p>
-        <p data-fr="Et c'est peut-être le plus grand obstacle, <strong>ne pas avoir, dans son entourage, quelqu'un qui connaît déjà le chemin.</strong> Pas de coach, pas d'intermédiaire de confiance, pas de modèle proche à qui poser ses questions sans gêne." data-en="And this is perhaps the biggest obstacle, <strong>not having, within reach, someone who already knows the way.</strong> No coach, no trusted intermediary, no close role model to ask questions without embarrassment." data-wo="Te looloo ngir moo gën a metti, <strong>kenn déeku am ci sa wàll kenn ku xam yoon wi.</strong> Amul njombalanteg, amul jubluwaay bu wér, amul ku ko mën a laaj ay laaj te du am xel-tëdd." data-sn="A naane wo ko xeere koota, <strong>maxa fo kente sento, mexi karaxaane xini ye yi.</strong> Maxa fo coach, maxa fo jubluwaayu xanun, maxa fo modelu kenne soore ye laaji.">Et c'est peut-être le plus grand obstacle, <strong>ne pas avoir, dans son entourage, quelqu'un qui connaît déjà le chemin.</strong> Pas de coach, pas d'intermédiaire de confiance, pas de modèle proche à qui poser ses questions sans gêne.</p>
+    <div class="s-head">
+      <div class="eyebrow">Le constat</div>
+      <h2 class="display">Un savoir rare. Pourtant indispensable.</h2>
+      <p class="lede">L'éducation financière manque à la plupart des gens, quelle que soit leur origine. Mais pour la diaspora et les communautés qui lui ressemblent, trois obstacles s'ajoutent presque toujours au tableau.</p>
+    </div>
+    <div class="obstacles">
+      <div class="obstacle">
+        <div class="obstacle-n">01</div>
+        <h3>La langue</h3>
+        <p>Le vocabulaire financier est une barrière à lui seul. Les contrats, les démarches, les conditions générales sont écrits pour des gens qui maîtrisent déjà les codes.</p>
       </div>
-      <div class="story-aside">
-        <div class="story-quote">
-          <div class="sq-text" data-fr="Trois obstacles reviennent sans cesse, la langue, la complexité du système, l'absence de bons contacts. Aucun n'est insurmontable. Mais ensemble, ils découragent." data-en="Three obstacles keep coming back, language, system complexity, the lack of the right contacts. None is insurmountable. But together, they discourage." data-wo="Ñetti jàll yu dëgër, làkk wi, sàrtu xaalis bi, amul jëfandikukat yu baax. Kenn ci ñoom du jàll bu mën a tax. Waaye bokk nañu, dañuy noppalikoo." data-sn="Saxa jaalle yi a wereyiri keterandi, lakka, sariyandi xaalisi a koota, maxa fo dunkutu xine. Maxa kente yi a kebeyi. Konye bokkandi, ye fo kelle.">Trois obstacles reviennent sans cesse, la langue, la complexité du système, l'absence de bons contacts. Aucun n'est insurmontable. Mais ensemble, ils découragent.</div>
-          <div class="sq-origin" data-fr="Le constat" data-en="The reality" data-wo="Lu xewoon" data-sn="Xabaare">Le constat</div>
-        </div>
-        <div class="story-quote" style="background:var(--terra-pale);border-left-color:var(--terra);">
-          <div class="sq-text" style="font-size:17px;" data-fr="Notre ambition, rendre l'éducation financière simple à comprendre, dans une langue claire, avec un accompagnement humain réel." data-en="Our ambition, make financial education simple to understand, in clear language, with real human support." data-wo="Sunu yéene, xam-xam ci xaalis nekk lu yomb a xam, ci làkk wu wér, ak ndimbal bu réy." data-sn="Yeenandi yire, karanteyaaxun xaalisi nekk fo yomboore xam, lakka wo seerande, ak yamaande dunkutu.">Notre ambition, rendre l'éducation financière simple à comprendre, dans une langue claire, avec un accompagnement humain réel.</div>
-          <div class="sq-origin" style="color:var(--terra);" data-fr="Notre vision" data-en="Our vision" data-wo="Sunu jubluwaay" data-sn="Yeenandi yire">Notre vision</div>
-        </div>
+      <div class="obstacle">
+        <div class="obstacle-n">02</div>
+        <h3>La complexité</h3>
+        <p>Comprendre un placement, une fiscalité ou un crédit demande du temps, et souvent quelqu'un pour expliquer. Ce temps et cette personne, tout le monde ne les a pas.</p>
+      </div>
+      <div class="obstacle">
+        <div class="obstacle-n">03</div>
+        <h3>L'absence de relais</h3>
+        <p>C'est le plus lourd des trois : ne compter personne, dans son entourage, qui connaisse déjà le chemin. Aucun modèle proche à qui poser une question sans gêne.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:32px;">Aucun de ces obstacles n'est insurmontable. Ensemble, ils découragent. NiouDem existe pour les lever un par un.</p>
+  </div>
+</section>
+
+<!-- ============ À QUI ÇA S'ADRESSE ============ -->
+<section class="section">
+  <div class="s-inner">
+    <div class="s-head">
+      <div class="eyebrow">À qui ça s'adresse</div>
+      <h2 class="display">Tu es au bon endroit si…</h2>
+    </div>
+    <div class="grille-4">
+      <div class="carte">
+        <div class="carte-num">01</div>
+        <h3>Tu travailles dur sans avancer</h3>
+        <p>« À la fin du mois il ne reste rien, et je ne sais pas vraiment où ça part. » Ce n'est pas un problème de revenus, c'est un problème de structure.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">02</div>
+        <h3>Tu as déjà essayé de comprendre</h3>
+        <p>Une vidéo, un article, un ami qui parlait d'ETF — et tu as décroché au bout de dix minutes de jargon. Ce n'est pas toi, c'est la façon dont c'était expliqué.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">03</div>
+        <h3>Tu veux transmettre quelque chose</h3>
+        <p>« Mes parents n'avaient rien à me laisser. » Ce qui se construit aujourd'hui devient le point de départ de ceux qui viennent après.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">04</div>
+        <h3>Tu penses qu'il est trop tard</h3>
+        <p>Ou qu'il faudrait déjà avoir de l'argent pour s'y intéresser. Les deux sont faux, et c'est précisément par là qu'on commence.</p>
+      </div>
+    </div>
+    <div class="refrain">NiouDem.</div>
+  </div>
+</section>
+
+<!-- ============ LA MÉTHODE ============ -->
+<section class="section section-soft" id="methode">
+  <div class="s-inner">
+    <div class="s-head center">
+      <div class="eyebrow center">La méthode</div>
+      <h2 class="display">La méthode des petites actions.</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">Une grande décision financière se prend rarement. Une petite action se répète. C'est sur cette répétition qu'est construit tout le parcours.</p>
+    </div>
+    <div class="grille-4">
+      <div class="carte">
+        <div class="carte-num">01</div>
+        <h3>Des leçons courtes</h3>
+        <p>Cinq à douze minutes. Une seule idée à la fois, en français normal. Si une phrase doit être relue deux fois, elle est mal écrite, et on la réécrit.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">02</div>
+        <h3>Un quiz sans piège</h3>
+        <p>Deux ou trois questions à la fin. Aucune pénalité, aucun score public. Quand tu te trompes, l'explication arrive tout de suite.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">03</div>
+        <h3>Une action concrète</h3>
+        <p>Une chose à faire ce soir, dans ta vraie vie. Sans ce geste, une leçon n'est qu'un souvenir de plus, effacé en trois jours.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-num">04</div>
+        <h3>Un carnet qui se remplit</h3>
+        <p>Chaque action cochée s'inscrit dans ton carnet de route. Au bout de trois mois, tu n'y lis plus une progression : tu y lis ce que tu as changé.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ÉMANCIPATION -->
-<section class="section section-white">
+<!-- ============ LES FORMATIONS ============ -->
+<section class="section" id="formations">
   <div class="s-inner">
-    <div class="s-tag" data-fr="Ce que ça change" data-en="What it changes">Ce que ça change</div>
-    <h2 class="s-title" data-fr="Trois libertés<br>à <em>construire.</em>" data-en="Three freedoms<br>to <em>build.</em>">Trois libertés<br>à <em>construire.</em></h2>
-    <p class="s-sub" data-fr="L'émancipation financière ne se résume pas à avoir plus d'argent. C'est se donner les moyens de vivre selon ses propres termes." data-en="Financial emancipation is not just about having more money. It means giving yourself the means to live on your own terms.">L'émancipation financière ne se résume pas à avoir plus d'argent. C'est se donner les moyens de vivre selon ses propres termes.</p>
-    <div class="emancipation-grid">
-      <div class="em-card">
-        <div class="em-icon">🛡️</div>
-        <div class="em-title" data-fr="La sécurité" data-en="Security">La sécurité</div>
-        <div class="em-desc" data-fr="Ne plus vivre dans l'angoisse du compte en rouge, de l'imprévu qui ruine tout, du mois qui ne finit jamais. <strong>Construire un fonds d'urgence, c'est acheter sa tranquillité d'esprit.</strong>" data-en="No longer living in fear of an overdrawn account, an unexpected expense that ruins everything, a month that never ends. <strong>Building an emergency fund means buying peace of mind.</strong>">Ne plus vivre dans l'angoisse du compte en rouge, de l'imprévu qui ruine tout, du mois qui ne finit jamais. <strong>Construire un fonds d'urgence, c'est acheter sa tranquillité d'esprit.</strong></div>
-      </div>
-      <div class="em-card">
-        <div class="em-icon">📈</div>
-        <div class="em-title" data-fr="Le patrimoine" data-en="Wealth">Le patrimoine</div>
-        <div class="em-desc" data-fr="Investir en bourse, dans l'immobilier, dans des actifs qui prennent de la valeur. <strong>Construire quelque chose qui existera encore dans 20 ans, et qu'on pourra transmettre.</strong>" data-en="Investing in the stock market, real estate, assets that grow in value. <strong>Building something that will still exist in 20 years, and that can be passed on.</strong>">Investir en bourse, dans l'immobilier, dans des actifs qui prennent de la valeur. <strong>Construire quelque chose qui existera encore dans 20 ans, et qu'on pourra transmettre.</strong></div>
-      </div>
-      <div class="em-card">
-        <div class="em-icon">🌅</div>
-        <div class="em-title" data-fr="La retraite choisie" data-en="Chosen retirement">La retraite choisie</div>
-        <div class="em-desc" data-fr="Ne pas dépendre uniquement d'un système de retraite sous pression. <strong>Préparer sa propre sortie, à son rythme, selon ses propres règles.</strong> Parce que la liberté se prépare." data-en="Not depending solely on a pension system under pressure. <strong>Preparing your own exit, at your own pace, on your own terms.</strong> Because freedom is built in advance.">Ne pas dépendre uniquement d'un système de retraite sous pression. <strong>Préparer sa propre sortie, à son rythme, selon ses propres règles.</strong> Parce que la liberté se prépare.</div>
-      </div>
+    <div class="s-head">
+      <div class="eyebrow">Le parcours</div>
+      <h2 class="display">Huit formations, dans un ordre qui a du sens.</h2>
+      <p class="lede">On ne parle pas d'investir avant d'avoir parlé de budget, et pas de budget avant d'avoir compris ce qu'est vraiment l'argent. La première est ouverte à tout le monde, gratuitement et en entier.</p>
     </div>
-  </div>
-</section>
-
-<!-- POUR QUI -->
-<section class="section section-sand">
-  <div class="s-inner">
-    <div class="s-tag" data-fr="Pour qui" data-en="Who it's for">Pour qui</div>
-    <h2 class="s-title" data-fr="Si cette voix<br><em>te ressemble.</em>" data-en="If this voice<br><em>sounds like you.</em>">Si cette voix<br><em>te ressemble.</em></h2>
-    <div class="forwhom-list">
-      <div class="fw-item">
-        <div class="fw-num">01</div>
-        <div class="fw-content">
-          <div class="fw-title" data-fr="Tu travailles dur mais tu n'avances pas" data-en="You work hard but don't move forward">Tu travailles dur mais tu n'avances pas</div>
-          <div class="fw-voice" data-fr="« À la fin du mois il ne reste rien. Je ne sais pas où ça part. »" data-en="« At the end of the month there's nothing left. I don't know where it goes. »">« À la fin du mois il ne reste rien. Je ne sais pas où ça part. »</div>
-          <div class="fw-answer" data-fr="Tu n'as pas un problème de revenus. Tu as un problème de structure, personne ne t'a appris à allouer, à automatiser, à faire travailler ce que tu gagnes. <strong>NiouDem te donne ce système.</strong>" data-en="You don't have an income problem. You have a structure problem, no one taught you how to allocate, automate, make what you earn work for you. <strong>NiouDem gives you that system.</strong>">Tu n'as pas un problème de revenus. Tu as un problème de structure, personne ne t'a appris à allouer, à automatiser, à faire travailler ce que tu gagnes. <strong>NiouDem te donne ce système.</strong></div>
-        </div>
-      </div>
-      <div class="fw-item">
-        <div class="fw-num">02</div>
-        <div class="fw-content">
-          <div class="fw-title" data-fr="Tu veux investir mais tu ne sais pas par où commencer" data-en="You want to invest but don't know where to start">Tu veux investir mais tu ne sais pas par où commencer</div>
-          <div class="fw-voice" data-fr="« J'entends parler de bourse, de Bitcoin, mais j'ai peur de perdre ce que j'ai. »" data-en="« I hear about stocks, Bitcoin, but I'm afraid of losing what I have. »">« J'entends parler de bourse, de Bitcoin, mais j'ai peur de perdre ce que j'ai. »</div>
-          <div class="fw-answer" data-fr="La peur vient de l'ignorance, pas du risque réel. <strong>La compréhension remplace la peur. L'action suit naturellement.</strong>" data-en="Fear comes from ignorance, not real risk. <strong>Understanding replaces fear. Action follows naturally.</strong>">La peur vient de l'ignorance, pas du risque réel. <strong>La compréhension remplace la peur. L'action suit naturellement.</strong></div>
-        </div>
-      </div>
-      <div class="fw-item">
-        <div class="fw-num">03</div>
-        <div class="fw-content">
-          <div class="fw-title" data-fr="Tu veux construire quelque chose à transmettre" data-en="You want to build something to pass on">Tu veux construire quelque chose à transmettre</div>
-          <div class="fw-voice" data-fr="« Mes parents n'avaient rien à me laisser. Moi je veux que mes enfants partent avec quelque chose. »" data-en="« My parents had nothing to leave me. I want my children to start with something. »">« Mes parents n'avaient rien à me laisser. Moi je veux que mes enfants partent avec quelque chose. »</div>
-          <div class="fw-answer" data-fr="Le patrimoine se construit sur des décennies. <strong>Chaque décision prise aujourd'hui est une fondation pour ceux qui viennent après.</strong>" data-en="Wealth is built over decades. <strong>Every decision made today is a foundation for those who come after.</strong>">Le patrimoine se construit sur des décennies. <strong>Chaque décision prise aujourd'hui est une fondation pour ceux qui viennent après.</strong></div>
-        </div>
-      </div>
-      <div class="fw-item">
-        <div class="fw-num">04</div>
-        <div class="fw-content">
-          <div class="fw-title" data-fr="Tu veux ne plus dépendre d'un seul salaire" data-en="You want to stop depending on a single salary">Tu veux ne plus dépendre d'un seul salaire</div>
-          <div class="fw-voice" data-fr="« Si je perds mon emploi demain, je n'ai rien. Je veux créer d'autres sources de revenus. »" data-en="« If I lose my job tomorrow, I have nothing. I want to create other income streams. »">« Si je perds mon emploi demain, je n'ai rien. Je veux créer d'autres sources de revenus. »</div>
-          <div class="fw-answer" data-fr="Les revenus passifs ne sont pas un mythe. <strong>L'immobilier locatif, les dividendes, les intérêts composés, tout ça s'apprend et se construit méthodiquement.</strong>" data-en="Passive income is not a myth. <strong>Rental income, dividends, compound interest, all of this can be learned and built methodically.</strong>">Les revenus passifs ne sont pas un mythe. <strong>L'immobilier locatif, les dividendes, les intérêts composés, tout ça s'apprend et se construit méthodiquement.</strong></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LE PARCOURS -->
-<section class="section section-white">
-  <div class="s-inner">
-    <div class="s-tag" data-fr="Le parcours" data-en="The path" data-wo="Yoon wi" data-sn="Sariyandi yi">Le parcours</div>
-    <h2 class="s-title" data-fr="Avancer pas<br>à pas, <em>visiblement.</em>" data-en="Moving forward,<br>step by <em>step.</em>" data-wo="Jëm kanam<br>léer la <em>gis.</em>" data-sn="Tasandi karewa<br>karewa, <em>seerande.</em>">Avancer pas<br>à pas, <em>visiblement.</em></h2>
-    <p class="s-sub" data-fr="Chaque formation est découpée en leçons courtes. Chaque leçon se termine par une vérification et une action concrète. Vous voyez exactement où vous en êtes, à chaque instant." data-en="Each course is broken into short lessons. Each lesson ends with a check and a concrete action. You see exactly where you stand, at every moment." data-wo="Jàng bu nekk dañu koy xaaj ci yoon yu gàtt. Yoon bu nekk dafay jeexe ak seetlu ak jëf wu wér. Dangay gis fu nga nekk, ci waxtu wu nekk." data-sn="Karandi yi a beydi karewa fanaande. Karewa fanaande a hentu kentande ak jaaye fanaande. Yi a seerande tani a beydi, kana wakate.">Chaque formation est découpée en leçons courtes. Chaque leçon se termine par une vérification et une action concrète. Vous voyez exactement où vous en êtes, à chaque instant.</p>
-    <div class="gam-grid">
-      <div class="gam-card">
-        <div class="gam-icon">📖</div>
-        <div class="gam-title" data-fr="Leçons courtes" data-en="Short lessons" data-wo="Jàng yu gàtt" data-sn="Karandi fanaande">Leçons courtes</div>
-        <div class="gam-desc" data-fr="5 à 15 minutes. Une idée à la fois, expliquée simplement." data-en="5 to 15 minutes. One idea at a time, explained simply." data-wo="5 ba 15 simili. Benn xalaat ci kaw, leer la wax." data-sn="5 ko 15 minit. Benne xalanti, seerande wari.">5 à 15 minutes. Une idée à la fois, expliquée simplement.</div>
-      </div>
-      <div class="gam-card">
-        <div class="gam-icon">✓</div>
-        <div class="gam-title" data-fr="Vérification" data-en="Verification" data-wo="Seetlu" data-sn="Kentande">Vérification</div>
-        <div class="gam-desc" data-fr="Un court contrôle après chaque leçon, pour confirmer que c'est acquis." data-en="A short check after each lesson, to confirm it has been understood." data-wo="Seetlu bu gàtt ci kowu jàng bu nekk, ngir wóor ne dañu ko jàppe." data-sn="Kentande fanaande karewu hentu, ko wonki ye hentande.">Un court contrôle après chaque leçon, pour confirmer que c'est acquis.</div>
-      </div>
-      <div class="gam-card">
-        <div class="gam-icon">⚡</div>
-        <div class="gam-title" data-fr="Action réelle" data-en="Real action" data-wo="Jëf wu wér" data-sn="Jaaye seerande">Action réelle</div>
-        <div class="gam-desc" data-fr="Une tâche simple à réaliser dans la vraie vie, pour ancrer ce qui vient d'être appris." data-en="A simple task to complete in real life, to anchor what was just learned." data-wo="Jëf bu yomb ci dund gu dëgg, ngir tëkk lu nekk jàng." data-sn="Karewu yombo ko jaaye kine sento, ko a yamaande ye karandiyi.">Une tâche simple à réaliser dans la vraie vie, pour ancrer ce qui vient d'être appris.</div>
-      </div>
-      <div class="gam-card">
-        <div class="gam-icon">◐</div>
-        <div class="gam-title" data-fr="Progression visible" data-en="Visible progress" data-wo="Jëm kanam wu gis" data-sn="Tasandi seerande">Progression visible</div>
-        <div class="gam-desc" data-fr="Un parcours qui se remplit formation après formation, jusqu'au dernier module." data-en="A path that fills up course after course, until the final module." data-wo="Yoon wuy fees jàng ci jàng, ba ci mujjantal mi." data-sn="Sariyandi ye fee karandi karandi, ko mujantale.">Un parcours qui se remplit formation après formation, jusqu'au dernier module.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORMATIONS -->
-<section class="section section-white" id="formations">
-  <div class="s-inner">
-    <div class="s-tag" data-fr="Les formations" data-en="The courses">Les formations</div>
-    <h2 class="s-title" data-fr="8 formations.<br><em>Un seul accès.</em>" data-en="8 courses.<br><em>One access.</em>">8 formations.<br><em>Un seul accès.</em></h2>
-    <p class="s-sub" data-fr="De la compréhension du système monétaire jusqu'à l'optimisation fiscale. Un parcours complet, accessible à tous, applicable dès le lendemain." data-en="From understanding the monetary system to tax optimization. A complete journey, accessible to all, applicable from the next day.">De la compréhension du système monétaire jusqu'à l'optimisation fiscale. Un parcours complet, accessible à tous, applicable dès le lendemain.</p>
     <div class="formations-grid">
-      <div class="f-card" onclick="window.location='monnaie.html'">
-        <div class="fc-num">00</div>
-        <div class="fc-title" data-fr="Comprendre la monnaie & le système" data-en="Understanding money & the system">Comprendre la monnaie & le système</div>
-        <div class="fc-desc" data-fr="L'inflation, les banques centrales, pourquoi rester passif coûte cher." data-en="Inflation, central banks, why staying passive is costly.">L'inflation, les banques centrales, pourquoi rester passif coûte cher.</div>
-        <div class="fc-meta">5h · 14 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="monnaie" onclick="goFormation('monnaie')"><span class="f-hublot" id="hublot-monnaie"></span>
+        <div class="fc-num">00</div><div class="fc-title">Comprendre la monnaie</div>
+        <div class="fc-desc">D'où vient l'argent, et pourquoi il fond doucement quand il ne bouge pas.</div>
+        <div class="fc-meta">14 leçons · 5 h</div>
       </div>
-      <div class="f-card" onclick="window.location='psychologie.html'">
-        <div class="fc-num">01</div>
-        <div class="fc-title" data-fr="Psychologie de l'argent" data-en="Psychology of money">Psychologie de l'argent</div>
-        <div class="fc-desc" data-fr="Vos biais, vos croyances, vos émotions. Ce qui sabote vos décisions." data-en="Your biases, beliefs, emotions. What sabotages your decisions.">Vos biais, vos croyances, vos émotions. Ce qui sabote vos décisions.</div>
-        <div class="fc-meta">4h · 12 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="psychologie" onclick="goFormation('psychologie')"><span class="f-hublot" id="hublot-psychologie"></span>
+        <div class="fc-num">01</div><div class="fc-title">Psychologie de l'argent</div>
+        <div class="fc-desc">Tes biais, tes croyances, et les émotions qui décident à ta place.</div>
+        <div class="fc-meta">12 leçons · 4 h</div>
       </div>
-      <div class="f-card" onclick="window.location='budget.html'">
-        <div class="fc-num">02</div>
-        <div class="fc-title" data-fr="Maîtriser son budget" data-en="Master your budget">Maîtriser son budget</div>
-        <div class="fc-desc" data-fr="50/30/20, épargne automatique, enveloppes budgétaires." data-en="50/30/20, automatic savings, budget envelopes.">50/30/20, épargne automatique, enveloppes budgétaires.</div>
-        <div class="fc-meta">5h · 16 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="budget" onclick="goFormation('budget')"><span class="f-hublot" id="hublot-budget"></span>
+        <div class="fc-num">02</div><div class="fc-title">Maîtriser son budget</div>
+        <div class="fc-desc">La règle 50/30/20 et l'épargne qui se fait sans y penser.</div>
+        <div class="fc-meta">16 leçons · 5 h</div>
       </div>
-      <div class="f-card" onclick="window.location='bourse.html'">
-        <div class="fc-num">03</div>
-        <div class="fc-title" data-fr="Premiers pas en bourse" data-en="First steps in the stock market">Premiers pas en bourse</div>
-        <div class="fc-desc" data-fr="ETF, PEA, DCA. Investir sans spéculer." data-en="ETF, PEA, DCA. Investing without speculating.">ETF, PEA, DCA. Investir sans spéculer.</div>
-        <div class="fc-meta">8h · 24 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="bourse" onclick="goFormation('bourse')"><span class="f-hublot" id="hublot-bourse"></span>
+        <div class="fc-num">03</div><div class="fc-title">Premiers pas en bourse</div>
+        <div class="fc-desc">ETF, PEA, versements réguliers. Investir sans spéculer.</div>
+        <div class="fc-meta">24 leçons · 8 h</div>
       </div>
-      <div class="f-card" onclick="window.location='crypto.html'">
-        <div class="fc-num">04</div>
-        <div class="fc-title" data-fr="Bitcoin & Cryptomonnaies" data-en="Bitcoin & Cryptocurrencies">Bitcoin & Cryptomonnaies</div>
-        <div class="fc-desc" data-fr="Blockchain, sécurité, stratégie DCA, fiscalité." data-en="Blockchain, security, DCA strategy, taxation.">Blockchain, sécurité, stratégie DCA, fiscalité.</div>
-        <div class="fc-meta">6h · 18 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="crypto" onclick="goFormation('crypto')"><span class="f-hublot" id="hublot-crypto"></span>
+        <div class="fc-num">04</div><div class="fc-title">Bitcoin &amp; cryptomonnaies</div>
+        <div class="fc-desc">Le fonctionnement, les arnaques courantes, la fiscalité française.</div>
+        <div class="fc-meta">18 leçons · 6 h</div>
       </div>
-      <div class="f-card" onclick="window.location='immobilier.html'">
-        <div class="fc-num">05</div>
-        <div class="fc-title" data-fr="Investir dans la pierre" data-en="Real estate investing">Investir dans la pierre</div>
-        <div class="fc-desc" data-fr="SCPI, LMNP, effet de levier, rendement locatif." data-en="SCPI, LMNP, leverage, rental yield.">SCPI, LMNP, effet de levier, rendement locatif.</div>
-        <div class="fc-meta">6h · 18 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="immobilier" onclick="goFormation('immobilier')"><span class="f-hublot" id="hublot-immobilier"></span>
+        <div class="fc-num">05</div><div class="fc-title">Investir dans la pierre</div>
+        <div class="fc-desc">SCPI, LMNP, rendement locatif : ce que ça implique vraiment.</div>
+        <div class="fc-meta">18 leçons · 6 h</div>
       </div>
-      <div class="f-card" onclick="window.location='epargne.html'">
-        <div class="fc-num">06</div>
-        <div class="fc-title" data-fr="Épargne & sécurité" data-en="Savings & security">Épargne & sécurité</div>
-        <div class="fc-desc" data-fr="Fonds d'urgence, assurance-vie, PER, prévoyance." data-en="Emergency fund, life insurance, PER, welfare.">Fonds d'urgence, assurance-vie, PER, prévoyance.</div>
-        <div class="fc-meta">3h · 10 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="epargne" onclick="goFormation('epargne')"><span class="f-hublot" id="hublot-epargne"></span>
+        <div class="fc-num">06</div><div class="fc-title">Épargne &amp; sécurité</div>
+        <div class="fc-desc">Fonds d'urgence, assurance-vie, PER. Se protéger avant de viser.</div>
+        <div class="fc-meta">10 leçons · 3 h</div>
       </div>
-      <div class="f-card" onclick="window.location='fiscalite.html'">
-        <div class="fc-num">07</div>
-        <div class="fc-title" data-fr="Optimisation fiscale" data-en="Tax optimization">Optimisation fiscale</div>
-        <div class="fc-desc" data-fr="PEA, PER, LMNP, flat tax. Garder le maximum." data-en="PEA, PER, LMNP, flat tax. Keep the maximum.">PEA, PER, LMNP, flat tax. Garder le maximum.</div>
-        <div class="fc-meta">7h · 20 leçons</div>
-        <div class="fc-arrow">Découvrir →</div>
+      <div class="f-card" data-formation="fiscalite" onclick="goFormation('fiscalite')"><span class="f-hublot" id="hublot-fiscalite"></span>
+        <div class="fc-num">07</div><div class="fc-title">Optimisation fiscale</div>
+        <div class="fc-desc">PEA, PER, LMNP, flat tax : payer ce qu'on doit, pas davantage.</div>
+        <div class="fc-meta">20 leçons · 7 h</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMMUNAUTÉ -->
-<section class="section section-ink" id="communaute">
+<!-- ============ L'ACCOMPAGNEMENT ============ -->
+<section class="section section-soft" id="accompagnement">
   <div class="s-inner">
-    <div class="community-inner">
-      <div class="community-stats">
-        <div class="cs-item"><div class="cs-num">8</div><div class="cs-label" data-fr="Formations complètes" data-en="Complete courses" data-wo="Jàng yu mat" data-sn="Karandi konyo">Formations complètes</div></div>
-        <div class="cs-item"><div class="cs-num">120+</div><div class="cs-label" data-fr="Leçons au total" data-en="Total lessons" data-wo="Jàng yu bare" data-sn="Karandi bare">Leçons au total</div></div>
-        <div class="cs-item"><div class="cs-num">24h</div><div class="cs-label" data-fr="Délai de réponse coach" data-en="Coach response time">Délai de réponse coach</div></div>
+    <div class="accomp">
+      <div>
+        <div class="eyebrow">L'accompagnement</div>
+        <h2 class="display" style="margin-bottom:14px;">On n'y va pas seuls.</h2>
+        <p class="lede">Le troisième obstacle — ne connaître personne qui ait déjà fait le chemin — ne se règle pas avec des leçons. Il se règle avec quelqu'un en face.</p>
+        <ul>
+          <li><strong>Un échange d'accueil, offert.</strong> Trente minutes pour regarder ta situation et décider ensemble par où commencer.</li>
+          <li><strong>Une communauté qui pose les mêmes questions.</strong> Celles qu'on n'ose pas poser à son banquier.</li>
+          <li><strong>Des réponses écrites quand tu bloques</strong> sur une notion, sans avoir à faire semblant d'avoir compris.</li>
+        </ul>
       </div>
-      <div class="community-text">
-        <div class="s-tag s-tag-light" data-fr="La communauté" data-en="The community">La communauté</div>
-        <h2 class="ct-title" data-fr="On n'y va pas <em>seuls.</em>" data-en="We don't go there <em>alone.</em>">On n'y va pas <em>seuls.</em></h2>
-        <p class="ct-sub" data-fr="NiouDem c'est aussi une communauté de gens qui avancent ensemble, qui partagent leurs questions, leurs doutes, leurs victoires. Des coachs qui répondent. Des pairs qui comprennent. Parce que le progrès financier est accéléré quand il est partagé." data-en="NiouDem is also a community of people moving forward together, sharing their questions, doubts, victories. Coaches who respond. Peers who understand. Because financial progress accelerates when shared.">NiouDem c'est aussi une communauté de gens qui avancent ensemble, qui partagent leurs questions, leurs doutes, leurs victoires. Des coachs qui répondent. Des pairs qui comprennent. Parce que le progrès financier est accéléré quand il est partagé.</p>
+      <div class="echange">
+        <div class="echange-note">Exemple d'échange</div>
+
+        <div class="bulle">
+          <div class="bulle-qui">Une question reçue</div>
+          <div class="bulle-txt">Ma banque me propose une assurance-vie avec 3&nbsp;% de frais d'entrée. Le conseiller dit que c'est normal. Je signe ou pas&nbsp;?</div>
+        </div>
+
+        <div class="bulle reponse">
+          <div class="bulle-qui">La réponse</div>
+          <div class="bulle-txt">On ne peut pas décider à ta place, mais voilà ce que ces 3&nbsp;% veulent dire concrètement&nbsp;: sur 1&nbsp;000&nbsp;€ versés, 970&nbsp;€ seulement sont réellement placés. Des contrats sans frais d'entrée existent. La vraie question à poser à ton conseiller&nbsp;: «&nbsp;quels sont les frais annuels de gestion&nbsp;?&nbsp;» — c'est souvent là que se joue l'essentiel.</div>
+        </div>
+
+        <div class="echange-pied">Aucune recommandation personnalisée. On explique le mécanisme, tu décides.</div>
       </div>
     </div>
+    <div class="refrain">NiouDem.</div>
   </div>
 </section>
 
-<!-- TARIFS -->
-<section class="section section-sand" id="tarifs">
+<!-- ============ TARIFS ============ -->
+<section class="section" id="tarifs">
   <div class="s-inner">
-    <div class="pricing-wrap">
-      <div class="pricing-header">
-        <div class="s-tag" data-fr="Tarifs" data-en="Pricing">Tarifs</div>
-        <h2 class="s-title" data-fr="Simple.<br><em>Accessible.</em>" data-en="Simple.<br><em>Accessible.</em>">Simple.<br><em>Accessible.</em></h2>
-        <p style="font-size:15px;font-weight:300;color:var(--ink-muted);line-height:1.75;max-width:400px;margin:0 auto;" data-fr="25 € pour accéder à l'ensemble des formations, offre de lancement. Premier échange avec un coach toujours offert." data-en="25 € for access to all courses, launch offer. First contact with a coach always free.">25 € pour accéder à l'ensemble des formations, offre de lancement. Premier échange avec un coach toujours offert.</p>
+    <div class="s-head">
+      <div class="eyebrow">Tarifs</div>
+      <h2 class="display">Le même contenu, trois prix.</h2>
+    </div>
+
+    <div class="tarif-intro">
+      <h3>Pourquoi trois prix pour la même chose</h3>
+      <p>Un tarif unique écarterait forcément une partie de ceux à qui NiouDem s'adresse. On en propose donc trois, et c'est toi qui choisis celui qui correspond à ta situation. <strong>Aucun justificatif n'est demandé et aucune vérification n'est faite.</strong> Ceux qui prennent le tarif soutien financent ceux qui prennent le tarif solidaire : c'est aussi simple que ça.</p>
+    </div>
+
+    <div class="tarifs">
+      <div class="tarif">
+        <div class="tarif-nom">Solidaire</div>
+        <div class="tarif-prix">5 €</div>
+        <div class="tarif-pour">Si le tarif normal représente pour toi un effort réel.</div>
+        <ul>
+          <li>Les huit formations</li>
+          <li>Le carnet de route</li>
+          <li>La communauté</li>
+        </ul>
+        <a href="inscription.html" class="btn-ghost">Commencer</a>
       </div>
-      <div class="pricing-grid">
-        <div class="p-card">
-          <span class="p-badge free" data-fr="Gratuit" data-en="Free">Gratuit</span>
-          <div class="p-name" data-fr="Premier contact" data-en="First contact">Premier contact</div>
-          <div class="p-desc" data-fr="Un échange pour analyser votre profil et définir ensemble le bon point de départ." data-en="A conversation to analyze your profile and define the right starting point together.">Un échange pour analyser votre profil et définir ensemble le bon point de départ.</div>
-          <div class="p-price"><span class="p-amount">0</span><span class="p-cur">€</span></div>
-          <div class="p-period" data-fr="30 min · sans engagement" data-en="30 min · no commitment">30 min · sans engagement</div>
-          <ul class="p-features">
-            <li data-fr="Analyse de votre profil financier" data-en="Analysis of your financial profile">Analyse de votre profil financier</li>
-            <li data-fr="Recommandations personnalisées" data-en="Personalized recommendations">Recommandations personnalisées</li>
-            <li data-fr="Sans carte bancaire" data-en="No credit card required">Sans carte bancaire</li>
-          </ul>
-          <a href="#" class="p-btn" data-fr="Prendre rendez-vous" data-en="Book a call">Prendre rendez-vous</a>
-        </div>
-        <div class="p-card main">
-          <span class="p-badge club" data-fr="NiouDem Club" data-en="NiouDem Club">NiouDem Club</span>
-          <div class="p-name" data-fr="On y va." data-en="Let's go.">On y va.</div>
-          <div class="p-desc" data-fr="Toutes les formations, à vie. Un coach. Une communauté. Le début d'une nouvelle trajectoire." data-en="All courses, for life. A coach. A community. The start of a new trajectory.">Toutes les formations, à vie. Un coach. Une communauté. Le début d'une nouvelle trajectoire.</div>
-          <div class="p-price"><span class="p-amount">25</span><span class="p-cur">€</span></div>
-          <div class="p-period" data-fr="accès à vie · tout inclus" data-en="lifetime access · all included">accès à vie · tout inclus</div>
-          <ul class="p-features">
-            <li data-fr="8 formations complètes" data-en="8 complete courses">8 formations complètes</li>
-            <li data-fr="Accès à vie + mises à jour" data-en="Lifetime access + updates">Accès à vie + mises à jour</li>
-            <li data-fr="1 session coach offerte (1h30)" data-en="1 free coaching session (1h30)">1 session coach offerte (1h30)</li>
-            <li data-fr="Communauté privée" data-en="Private community">Communauté privée</li>
-            <li data-fr="Statut Early Member" data-en="Early Member status">Statut Early Member</li>
-          </ul>
-          <a href="https://buy.stripe.com/CLUB_PLACEHOLDER" class="p-btn" data-fr="NiouDem, 25 €" data-en="NiouDem, 25 €" data-wo="NiouDem, 25 €" data-sn="NiouDem, 25 €">NiouDem, 25 €</a>
-        </div>
+
+      <div class="tarif mis-en-avant">
+        <div class="tarif-nom">Normal</div>
+        <div class="tarif-prix">25 €</div>
+        <div class="tarif-pour">Le prix qui fait vivre le projet et rend les deux autres possibles.</div>
+        <ul>
+          <li>Les huit formations, mises à jour comprises</li>
+          <li>Le carnet de route</li>
+          <li>Une session d'accompagnement offerte</li>
+          <li>La communauté</li>
+        </ul>
+        <a href="inscription.html" class="btn-primary">Commencer</a>
       </div>
-      <div class="pricing-footer" data-fr="Sessions de coaching supplémentaires disponibles à 25 €/session · 1h30 · Forfait possible" data-en="Additional coaching sessions available at 25 €/session · 1h30 · Package available">Sessions de coaching supplémentaires disponibles à 25 €/session · 1h30 · Forfait possible</div>
+
+      <div class="tarif">
+        <div class="tarif-nom">Soutien</div>
+        <div class="tarif-prix">60 €</div>
+        <div class="tarif-pour">Tu paies pour toi, et tu finances un accès solidaire.</div>
+        <ul>
+          <li>Tout ce que contient le tarif normal</li>
+          <li>Deux sessions d'accompagnement</li>
+          <li>Un accès solidaire offert à quelqu'un</li>
+        </ul>
+        <a href="inscription.html" class="btn-ghost">Commencer</a>
+      </div>
+    </div>
+
+    <div class="tarif-note">Paiement unique, sans abonnement. L'accès dit « à vie » s'entend pour toute la durée d'exploitation du service. Les formations ne sont pas encore ouvertes à la vente : le site est en phase de test, et seule la première formation, gratuite, est disponible.</div>
+  </div>
+</section>
+
+<!-- ============ LE CADRE ============ -->
+<section class="section section-soft">
+  <div class="s-inner">
+    <div class="s-head">
+      <div class="eyebrow">Le cadre</div>
+      <h2 class="display">Ce que NiouDem n'est pas.</h2>
+    </div>
+    <div class="cadre">
+      <h3>Nous ne sommes pas conseillers en investissement.</h3>
+      <p>Nous n'émettons aucune recommandation personnalisée, nous ne vendons aucun produit financier et nous ne touchons <strong>aucune commission</strong> sur ce que tu pourrais souscrire ailleurs. Ce que nous vendons est écrit sur cette page : de la formation.</p>
+      <p><strong>Aucun rendement n'est garanti nulle part sur ce site.</strong> Tout investissement comporte un risque de perte en capital, y compris de la totalité des sommes engagées. Les simulateurs présents dans les formations sont des outils pédagogiques : ils illustrent des mécanismes, ils ne prédisent rien.</p>
+      <p>Ce que nous faisons, en revanche : expliquer ces mécanismes assez clairement pour que les décisions que tu prendras soient réellement les tiennes.</p>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="section section-ink" style="padding-bottom:104px;">
-  <div class="cta-inner">
-    <div class="s-tag s-tag-light" data-fr="Prêt ?" data-en="Ready?">Prêt ?</div>
-    <h2 class="cta-title" data-fr="Entrer dans la finance<br>pour changer ta vie ?<br><em>NiouDem.</em>" data-en="Enter finance<br>to change your life?<br><em>NiouDem.</em>">Entrer dans la finance<br>pour changer ta vie ?<br><em>NiouDem.</em></h2>
-    <p class="cta-sub" data-fr="Rejoins des milliers de personnes qui ont décidé de prendre le contrôle. Pas demain. Maintenant." data-en="Join thousands of people who decided to take control. Not tomorrow. Now.">Rejoins des milliers de personnes qui ont décidé de prendre le contrôle. Pas demain. Maintenant.</p>
-    <a href="#tarifs" class="btn-gold" style="font-size:16px;padding:16px 40px;" data-fr="On y va, 25 € →" data-en="Let's go, 25 € →" data-wo="Nu dem, 25 € →" data-sn="No taxa, 25 € →">On y va, 25 € →</a>
-    <div class="cta-note" data-fr="ou <a href='#'>prendre un premier contact gratuit</a>" data-en="or <a href='#'>book a free first call</a>">ou <a href="#">prendre un premier contact gratuit</a></div>
+<!-- ============ QUESTIONS ============ -->
+<section class="section">
+  <div class="s-inner">
+    <div class="s-head">
+      <div class="eyebrow">Les questions qu'on nous pose</div>
+      <h2 class="display">Avant de commencer.</h2>
+    </div>
+    <div class="questions">
+      <div class="question">
+        <h3>Et si je n'ai que 50 € par mois ?</h3>
+        <p>C'est largement assez, et c'est le cas de figure pour lequel la méthode a été pensée. Les premières formations ne coûtent rien à appliquer : elles portent sur la compréhension et le budget, pas sur le placement.</p>
+      </div>
+      <div class="question">
+        <h3>Je n'y connais absolument rien.</h3>
+        <p>C'est le point de départ prévu. Aucune leçon ne suppose de connaissance préalable, et le parcours démarre par la question la plus basique de toutes : d'où vient l'argent.</p>
+      </div>
+      <div class="question">
+        <h3>Le tarif solidaire, c'est de la charité ?</h3>
+        <p>Non, c'est une répartition. Personne ne vérifie ton choix et personne ne le voit. Le tarif solidaire ne donne accès à rien de moins que le tarif normal : les huit formations sont exactement les mêmes.</p>
+      </div>
+      <div class="question">
+        <h3>Le site existe-t-il en wolof ?</h3>
+        <p>Pas encore, et nous préférons le dire plutôt que d'afficher une traduction à moitié faite. Le français est complet aujourd'hui ; l'anglais, le wolof et le soninké arrivent, langue par langue et page par page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLÔTURE ============ -->
+<section class="section section-soft">
+  <div class="s-inner">
+    <div class="cloture">
+      <h2 class="display">Une leçon. Cinq minutes. Ce soir.</h2>
+      <p>Pas besoin de tout savoir pour commencer. C'est même l'inverse : on commence pour savoir.</p>
+      <a href="inscription.html" class="btn-primary">Ouvrir la première leçon</a>
+      <div class="refrain">NiouDem.</div>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="ft">
-    <div class="ft-logo">Niou<em>Dem</em></div>
-    <div class="ft-links">
-      <a href="#histoire" data-fr="Notre histoire" data-en="Our story">Notre histoire</a>
-      <a href="#formations" data-fr="Formations" data-en="Courses">Formations</a>
-      <a href="#tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
-      <a href="vision.html" data-fr="Notre vision" data-en="Our vision">Notre vision</a>
+    <div class="ft-haut">
+      <div class="ft-brand">
+        <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="ft-name">Niou<em>Dem</em></span>
+      </div>
+      <div class="ft-links">
+        <a href="#constat">Le constat</a>
+        <a href="#methode">La méthode</a>
+        <a href="#formations">Formations</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="mentions-legales.html#confidentialite">Confidentialité</a>
+        <a href="mentions-legales.html#cgv">CGV</a>
+      </div>
     </div>
-    <div class="ft-copy">© 2025 NiouDem · Just Formation</div>
+    <p class="ft-mentions">NiouDem est un site de formation en éducation financière. Il ne fournit ni conseil en investissement personnalisé, ni service de gestion, ni intermédiation en produits financiers. Investir comporte un risque de perte en capital.</p>
+    <div class="ft-copy">© 2025 NiouDem · Méthode Petites Actions</div>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ── LANG SWITCH ── */
-var currentLang = 'fr';
-function setLang(lang){
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(function(btn){
-    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let FORMATIONS_UNLOCKED = false;
+
+/* Le carnet de route : la première petite action se fait ici, avant l'inscription. */
+(function(){
+  const ligne = document.getElementById('ligneAFaire');
+  const pied = document.getElementById('carnetPied');
+  if(!ligne || !pied) return;
+  function cocher(){
+    if(ligne.classList.contains('faite')) return;
+    ligne.classList.remove('a-faire');
+    ligne.classList.add('faite');
+    ligne.setAttribute('aria-pressed','true');
+    pied.classList.add('visible');
+  }
+  ligne.addEventListener('click', cocher);
+  ligne.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); cocher(); }
   });
-  document.querySelectorAll('[data-fr]').forEach(function(el){
-    var text = el.getAttribute('data-' + lang);
-    if(text) el.innerHTML = text;
-    else {
-      var fallback = el.getAttribute('data-fr');
-      if(fallback) el.innerHTML = fallback;
-    }
+})();
+
+function goFormation(f){
+  if(f === 'monnaie'){ window.location.href = 'monnaie.html'; return; }
+  window.location.href = FORMATIONS_UNLOCKED ? (f + '.html') : 'monnaie.html';
+}
+
+function applyHublots(completed){
+  FORMATIONS_UNLOCKED = completed;
+  ['monnaie','psychologie','budget','bourse','crypto','immobilier','epargne','fiscalite'].forEach(function(f){
+    const dot = document.getElementById('hublot-' + f);
+    const card = document.querySelector('[data-formation="' + f + '"]');
+    if(!dot) return;
+    const unlocked = (f === 'monnaie') || completed;
+    dot.classList.toggle('on', unlocked);
+    if(card) card.classList.toggle('locked', !unlocked);
   });
 }
-</script>
 
+async function signOut(){
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+(async function(){
+  applyHublots(false);
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session) return;
+
+  const { data: profile } = await sb.from('profiles').select('prenom, is_admin').eq('id', session.user.id).maybeSingle();
+  const prenom = (profile && profile.prenom) ? profile.prenom : 'Toi';
+
+  const lienAdmin = (profile && profile.is_admin)
+    ? '<a href="admin-retours.html" class="nav-login" style="color:var(--laiton);">Bêta</a>' +
+      '<a href="admin.html" class="nav-login">Admin</a>'
+    : '';
+
+  document.getElementById('navRight').innerHTML =
+    '<span style="font-family:var(--mono);font-size:12.5px;color:var(--encre-3);">' + prenom + '</span>' +
+    lienAdmin +
+    '<a href="trading-lab.html" class="nav-login">Trading Lab</a>' +
+    '<a href="lecons-monnaie.html" class="nav-cta">Continuer</a>' +
+    '<a href="#" onclick="signOut();return false;" class="nav-login">Déconnexion</a>';
+
+  const { data: badge } = await sb.from('badges').select('badge_name').eq('user_id', session.user.id).eq('badge_name','le_declic').maybeSingle();
+  applyHublots(!!badge);
+})();
+</script>
+<script src="retours.js" defer></script>
 </body>
 </html>

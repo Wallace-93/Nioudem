@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord de la bêta — NiouDem</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --encre:#12212B;--encre-2:#43555F;--encre-3:#7A8A93;
+  --papier:#FCFBF8;--papier-2:#EFF0EA;--trait:#DCDDD3;
+  --pin:#1E4B3C;--pin-clair:#E7EFEA;
+  --laiton:#B8862F;--laiton-clair:#F6EFE0;
+  --brique:#A24332;--brique-clair:#F8EDEA;
+  --display:'Newsreader',Georgia,serif;
+  --texte:'Karla',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+body{font-family:var(--texte);background:var(--papier);color:var(--encre-2);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:var(--pin);}
+:focus-visible{outline:2px solid var(--pin);outline-offset:3px;border-radius:3px;}
+
+.nav{border-bottom:1px solid var(--trait);background:var(--papier);position:sticky;top:0;z-index:20;}
+.nav-in{max-width:1000px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px;}
+.nav-mark{width:26px;height:26px;border-radius:6px;background:var(--pin);display:grid;place-items:center;flex:none;}
+.nav-mark svg{width:14px;height:14px;}
+.nav-name{font-family:var(--display);font-size:17px;font-weight:600;color:var(--encre);}
+.nav-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--laiton);background:var(--laiton-clair);border:1px solid #E4D2AC;padding:3px 9px;border-radius:100px;}
+.nav-liens{margin-left:auto;display:flex;gap:18px;}
+.nav-liens a{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--encre-2);}
+
+.wrap{max-width:1000px;margin:0 auto;padding:36px 22px 70px;}
+h1{font-family:var(--display);font-weight:500;font-size:34px;color:var(--encre);letter-spacing:-.018em;line-height:1.15;margin-bottom:8px;}
+.sous{color:var(--encre-3);font-size:15px;margin-bottom:28px;}
+
+.chiffres{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--trait);border:1px solid var(--trait);border-radius:11px;overflow:hidden;margin-bottom:26px;}
+.chiffre{background:var(--papier);padding:18px 18px 20px;}
+.chiffre-n{font-family:var(--display);font-size:30px;font-weight:500;color:var(--encre);line-height:1;}
+.chiffre-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--encre-3);margin-top:8px;}
+@media(max-width:700px){.chiffres{grid-template-columns:repeat(2,1fr);}}
+
+.filtres{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+.filtre{background:var(--papier);border:1px solid var(--trait);border-radius:100px;padding:6px 13px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--encre-2);}
+.filtre:hover{border-color:var(--encre-3);}
+.filtre.actif{background:var(--pin);border-color:var(--pin);color:#fff;}
+
+.retour{border:1px solid var(--trait);border-radius:11px;padding:18px 20px;margin-bottom:12px;background:var(--papier);}
+.retour-haut{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:9px;}
+.etiq{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid var(--trait);color:var(--encre-3);}
+.etiq.bug{color:var(--brique);background:var(--brique-clair);border-color:#EBC9C1;}
+.etiq.contenu{color:var(--pin);background:var(--pin-clair);border-color:#BFD6C9;}
+.etiq.idee{color:var(--laiton);background:var(--laiton-clair);border-color:#E4D2AC;}
+.retour-meta{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);margin-left:auto;}
+.retour-msg{color:var(--encre);font-size:15px;white-space:pre-wrap;}
+.retour-page{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);margin-top:9px;}
+
+.vide{text-align:center;padding:60px 20px;color:var(--encre-3);}
+.vide-t{font-family:var(--display);font-size:20px;color:var(--encre);margin-bottom:8px;}
+
+.bloc{margin-bottom:40px;}
+.bloc-titre{font-family:var(--display);font-size:24px;font-weight:500;color:var(--encre);letter-spacing:-.015em;margin-bottom:6px;}
+.bloc-sous{font-size:14px;color:var(--encre-3);margin-bottom:20px;max-width:66ch;}
+.onglets{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.entonnoir{border:1px solid var(--trait);border-radius:11px;overflow:hidden;}
+.barre-ligne{display:grid;grid-template-columns:132px 1fr 96px;gap:14px;align-items:center;padding:9px 16px;border-bottom:1px solid var(--trait);}
+.barre-ligne:last-child{border-bottom:0;}
+.barre-ligne.chute{background:var(--brique-clair);}
+.barre-nom{font-family:var(--mono);font-size:11.5px;color:var(--encre-3);}
+.barre-piste{background:var(--papier-2);border-radius:4px;height:16px;overflow:hidden;}
+.barre-jauge{height:100%;background:var(--pin);border-radius:4px;transition:width .4s ease-out;}
+.barre-ligne.chute .barre-jauge{background:var(--brique);}
+.barre-val{font-family:var(--mono);font-size:11.5px;color:var(--encre);text-align:right;}
+.barre-val span{color:var(--encre-3);}
+.legende{font-size:13px;color:var(--encre-3);margin-top:12px;line-height:1.6;}
+.avert{background:var(--laiton-clair);border:1px solid #E4D2AC;border-radius:9px;padding:13px 15px;font-size:13.5px;color:#7A5A12;margin-bottom:20px;line-height:1.6;}
+@media(max-width:640px){.barre-ligne{grid-template-columns:92px 1fr 74px;gap:9px;padding:8px 11px;}}
+.err{background:var(--brique-clair);border-left:3px solid var(--brique);border-radius:0 9px 9px 0;padding:16px 18px;font-size:14px;}
+
+.nav-name em,.ft-name em{font-style:normal;color:var(--laiton);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <span class="nav-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span class="nav-name">Niou<em>Dem</em></span>
+    <span class="nav-tag">Bêta</span>
+    <div class="nav-liens">
+      <a href="admin.html">Admin</a>
+      <a href="index.html">← Site</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="app">
+  <div class="vide"><div class="vide-t">Chargement…</div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://pchkshpbzsybvtwxqvrf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjaGtzaHBienN5YnZ0d3hxdnJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDgwMTAsImV4cCI6MjEwMTUyNDAxMH0.3EqyBUDmHHJ79mdDD6dmpVwsuEA0h2hF-75Up9R2Snc';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let RETOURS = [];
+let PROFILS = [];
+let PROGRESSION = [];
+let FILTRE = 'tous';
+let FORMATION = null;
+
+const LIBELLES = { bug:'Bug', contenu:'Contenu', idee:'Idée', autre:'Autre' };
+const NOMS_FORMATION = {
+  monnaie:'Comprendre la monnaie', psychologie:'Psychologie de l\'argent',
+  budget:'Maîtriser son budget', bourse:'Premiers pas en bourse',
+  crypto:'Bitcoin & cryptomonnaies', immobilier:'Investir dans la pierre',
+  epargne:'Épargne & sécurité', fiscalite:'Optimisation fiscale'
+};
+
+function dateCourte(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'short' }) + ' · ' +
+         d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+}
+
+function echapper(t){
+  const d = document.createElement('div');
+  d.textContent = t == null ? '' : String(t);
+  return d.innerHTML;
+}
+
+/* Entonnoir : pour chaque leçon d'une formation, combien de comptes
+   distincts l'ont terminée. La chute entre deux lignes consécutives
+   est l'endroit où les gens s'arrêtent. */
+function entonnoir(formation){
+  const parLecon = {};
+  PROGRESSION.forEach(function(p){
+    if(p.formation !== formation || !p.completed) return;
+    const n = Number(p.lesson_number);
+    if(!Number.isFinite(n)) return;
+    (parLecon[n] = parLecon[n] || new Set()).add(p.user_id);
+  });
+  const numeros = Object.keys(parLecon).map(Number).sort(function(a,b){ return a-b; });
+  if(numeros.length === 0) return [];
+  const max = numeros[numeros.length - 1];
+  const lignes = [];
+  for(let i = 1; i <= max; i++){
+    lignes.push({ lecon:i, comptes: parLecon[i] ? parLecon[i].size : 0 });
+  }
+  const depart = lignes[0].comptes || 1;
+  lignes.forEach(function(l, i){
+    l.pct = Math.round(l.comptes / depart * 100);
+    const prec = i > 0 ? lignes[i-1].comptes : l.comptes;
+    l.chute = prec > 0 && (prec - l.comptes) / prec >= 0.30 && prec >= 3;
+  });
+  return lignes;
+}
+
+function rendreStats(){
+  const actifs = new Set(PROGRESSION.filter(function(p){ return p.completed; }).map(function(p){ return p.user_id; }));
+  const septJours = Date.now() - 7*24*3600*1000;
+  const nouveaux = PROFILS.filter(function(p){ return new Date(p.created_at).getTime() > septJours; }).length;
+  const leconsFaites = PROGRESSION.filter(function(p){ return p.completed; }).length;
+
+  const formations = Object.keys(NOMS_FORMATION).filter(function(f){
+    return PROGRESSION.some(function(p){ return p.formation === f; });
+  });
+  if(!FORMATION || formations.indexOf(FORMATION) === -1) FORMATION = formations[0] || 'monnaie';
+
+  const lignes = entonnoir(FORMATION);
+  const petitEchantillon = PROFILS.length < 10;
+
+  const onglets = formations.map(function(f){
+    return '<button class="filtre ' + (FORMATION===f?'actif':'') + '" onclick="choisirFormation(\'' + f + '\')">' +
+           echapper(NOMS_FORMATION[f] || f) + '</button>';
+  }).join('');
+
+  const barres = lignes.length === 0
+    ? '<div class="vide"><div class="vide-t">Aucune leçon terminée</div><p>L\'entonnoir apparaîtra dès les premières leçons validées.</p></div>'
+    : '<div class="entonnoir">' + lignes.map(function(l){
+        return '<div class="barre-ligne ' + (l.chute?'chute':'') + '">' +
+          '<span class="barre-nom">Leçon ' + l.lecon + '</span>' +
+          '<span class="barre-piste"><span class="barre-jauge" style="width:' + Math.max(l.pct,1) + '%"></span></span>' +
+          '<span class="barre-val">' + l.comptes + ' <span>· ' + l.pct + '%</span></span>' +
+        '</div>';
+      }).join('') + '</div>';
+
+  return '<div class="bloc">' +
+    '<div class="bloc-titre">Où les gens s\'arrêtent</div>' +
+    '<div class="bloc-sous">Nombre de comptes ayant terminé chaque leçon. Une ligne surlignée signale une perte de plus de 30 % par rapport à la précédente : c\'est cette leçon-là qu\'il faut relire.</div>' +
+    (petitEchantillon ? '<div class="avert">Moins de dix comptes inscrits : ces chiffres sont encore du bruit, pas un signal. Attends une dizaine de testeurs actifs avant d\'en tirer une conclusion.</div>' : '') +
+    '<div class="chiffres">' +
+      '<div class="chiffre"><div class="chiffre-n">' + PROFILS.length + '</div><div class="chiffre-l">Comptes créés</div></div>' +
+      '<div class="chiffre"><div class="chiffre-n">' + actifs.size + '</div><div class="chiffre-l">Ont commencé</div></div>' +
+      '<div class="chiffre"><div class="chiffre-n">' + nouveaux + '</div><div class="chiffre-l">Inscrits cette semaine</div></div>' +
+      '<div class="chiffre"><div class="chiffre-n">' + leconsFaites + '</div><div class="chiffre-l">Leçons terminées</div></div>' +
+    '</div>' +
+    '<div class="onglets">' + onglets + '</div>' +
+    barres +
+    '<div class="legende">Le pourcentage est calculé par rapport au nombre de comptes ayant terminé la leçon 1.</div>' +
+  '</div>';
+}
+
+function rendre(){
+  const app = document.getElementById('app');
+  const compte = function(c){ return RETOURS.filter(function(r){ return r.categorie === c; }).length; };
+  const liste = FILTRE === 'tous' ? RETOURS : RETOURS.filter(function(r){ return r.categorie === FILTRE; });
+
+  const filtres = ['tous','bug','contenu','idee','autre'].map(function(c){
+    return '<button class="filtre ' + (FILTRE===c?'actif':'') + '" onclick="filtrer(\'' + c + '\')">' +
+      (c==='tous' ? 'Tous (' + RETOURS.length + ')' : LIBELLES[c] + ' (' + compte(c) + ')') + '</button>';
+  }).join('');
+
+  const corps = liste.length === 0
+    ? '<div class="vide"><div class="vide-t">Rien pour l\'instant</div><p>Les retours envoyés depuis le widget apparaîtront ici.</p></div>'
+    : liste.map(function(r){
+      return '<div class="retour">' +
+        '<div class="retour-haut">' +
+          '<span class="etiq ' + (r.categorie || '') + '">' + (LIBELLES[r.categorie] || 'Sans catégorie') + '</span>' +
+          (r.user_id ? '' : '<span class="etiq">Visiteur anonyme</span>') +
+          '<span class="retour-meta">' + dateCourte(r.created_at) + '</span>' +
+        '</div>' +
+        '<div class="retour-msg">' + echapper(r.message) + '</div>' +
+        '<div class="retour-page">' + echapper(r.page || 'page inconnue') + '</div>' +
+      '</div>';
+    }).join('');
+
+  app.innerHTML =
+    '<h1>Tableau de bord de la bêta</h1>' +
+    '<p class="sous">Ce que font les testeurs, et ce qu\'ils en disent.</p>' +
+    rendreStats() +
+    '<div class="bloc">' +
+      '<div class="bloc-titre">Retours reçus</div>' +
+      '<div class="bloc-sous">Tout ce qui a été envoyé depuis le widget, du plus récent au plus ancien.</div>' +
+      '<div class="filtres">' + filtres + '</div>' +
+      corps +
+    '</div>';
+}
+
+function choisirFormation(f){ FORMATION = f; rendre(); }
+
+function filtrer(c){ FILTRE = c; rendre(); }
+
+(async function(){
+  const app = document.getElementById('app');
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){ window.location.href = 'connexion.html'; return; }
+
+  const { data: profil } = await sb.from('profiles').select('is_admin').eq('id', session.user.id).maybeSingle();
+  if(!profil || !profil.is_admin){
+    app.innerHTML = '<div class="err">Cette page est réservée aux administrateurs.</div>';
+    return;
+  }
+
+  const [retours, profils, progression] = await Promise.all([
+    sb.from('retours').select('*').order('created_at', { ascending:false }).limit(300),
+    sb.from('profiles').select('id, created_at'),
+    sb.from('lesson_progress').select('user_id, formation, lesson_number, completed')
+  ]);
+
+  if(retours.error){
+    app.innerHTML = '<div class="err">Lecture des retours impossible : ' + echapper(retours.error.message) +
+      '<br><br>Vérifie que la politique de lecture administrateur a bien été créée sur la table <code>retours</code> (migration-3-retours.sql).</div>';
+    return;
+  }
+
+  RETOURS = retours.data || [];
+  PROFILS = profils.data || [];
+  PROGRESSION = progression.data || [];
+  rendre();
+})();
+</script>
+</body>
+</html>
